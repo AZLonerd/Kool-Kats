@@ -1,7 +1,6 @@
 (function () {
     const TOTAL = 5430000000;
     const ANSWER_CATS = 1500000000;
-    const ANSWER_DOGS = 393000000;
 
     const slider = document.getElementById("revenue-guess-slider");
     const catsEl = document.getElementById("revenue-guess-cats");
