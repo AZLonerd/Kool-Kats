@@ -14,15 +14,82 @@
     <!-- CSS libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/fontawesome.min.css">
 
     <!-- Custom CSS code -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/MovieRevenueStyles.css" />
 </head>
 
 <body>
+    <section>
+        <h2>
+            Kool Kats: The Tale of Two Tails
+        </h2>
+        <div class="revenue-image-row">
+            <img src="images/puss-in-boots.png" alt="Cat movie still" class="revenue-image">
+            <img src="images/dug.png" alt="Dog movie still" class="revenue-image">
+        </div>
+    </section>
+    <!--DANIELS SECTION-->
 
-    <div>hello world</div>
+    <!--GUESS REVENUE-->
+    <section class="revenue-guess-section container my-4">
+        <h4> American Cinema: Cats vs. Dogs </h4>
+        <p class="revenue-guess-subtitle">
+            Out of the <strong>$5.43&nbsp;billion</strong> earned by the top 15 grossing <strong>cat and dog films</strong>, how would you split the total between felines and canines?
+        </p>
+
+        <div class="revenue-guess-widget">
+            <div class="revenue-guess-slider-wrap">
+                <input id="revenue-guess-slider" class="revenue-guess-slider" type="range" min="0" max="100" value="50" step="1" />
+            </div>
+
+            <div class="revenue-guess-readout">
+                <div>Cats: <strong id="revenue-guess-cats">$1.90B</strong></div>
+                <div>Dogs: <strong id="revenue-guess-dogs">$3.53B</strong></div>
+            </div>
+
+            <button id="revenue-guess-submit" class="revenue-guess-submit">Submit guess</button>
+
+            <div id="revenue-guess-result" class="revenue-guess-result" hidden>
+                <p><strong>Answer:</strong> Cats = $1.50B, Dogs = $3.93B</p>
+                <p id="revenue-guess-diff"></p>
+            </div>
+        </div>
+    </section>
+
+    <!--Movie yapping + images-->
+    <section class="revenue-intro">
+        <p>
+            Whether they star as a furriendly fuzzball or crrrageous companion, cats and dogs have been featured in movies
+            as early as the 19th century! Through their close relationship with humans, cats and dogs have made an appearance
+            in thousanfs of movies and TV shows, acting in roles as funny, intelligent, and cute creatures!
+        </p>
+
+        <div class="revenue-image-row">
+            <img src="images/cat-movie.png" alt="Cat movie still" class="revenue-image">
+            <img src="images/dog-movie.png" alt="Dog movie still" class="revenue-image">
+        </div>
+
+
+
+    </section>
+
+    <!--Movie Revenue Data Vi-->
+    <section>
+        <p>
+            Let's explore how cats and dogs have performed at the box office. In the past 50 years, here are the top 15 highest
+            grossing films either showing a cat or a dog as a predominant figure:
+        </p>
+        <h4>Top 15 Grossing Films with a Predominant Cat or Dog</h4>
+        <div id="movie-ratings-viz"></div>
+    </section>
+
+    <!--ANGS SECTION-->
+    <!--MAYS SECTION-->
+    <!--JOSHS SECTION-->
+
+
 
     <!-- Load JS libraries -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
@@ -33,7 +100,9 @@
 
 
     <!-- Load data, create visualizations -->
-    <script src="js/main.js"></script>
-</body>
 
+    <script type="module" src="js/MovieRevenueViz.js"></script>
+    <script src="js/revenueGuess.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
 </html>
