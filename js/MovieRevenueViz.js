@@ -34,6 +34,7 @@ export function renderMovieRevenueViz(containerId = "#movie-ratings-viz") {
         .style("user-select", "none")
         .style("pointer-events", "none")
         .style("color", "#222");
+    caption.text("Click any circle to see its revenue!");
     const categories = [
         { label: "Movies Featuring Cats", x: width / 2 - GAP, color: "#f4a261", selected: "#d67227", bigR: CAT_BIG_R },
         { label: "Movies Featuring Dogs", x: width / 2 + GAP, color: "#457b9d", selected: "#2f5c7b", bigR: DOG_BIG_R },
@@ -175,7 +176,7 @@ export function renderMovieRevenueViz(containerId = "#movie-ratings-viz") {
             } else {
                 circle.transition().duration(160).attr("fill", c.color).attr("stroke", "none");
                 text.text(truncateText(d.title, d.r * 1.6));
-                caption.text("");
+                caption.text("Click any circle to see its revenue!");
                 d.showingRevenue = false;
                 selected = null;
             }

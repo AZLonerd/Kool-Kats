@@ -24,6 +24,22 @@
 
     slider.addEventListener("input", updateReadout);
     updateReadout();
+    function updateSliderColor() {
+        const value = slider.value;
+        slider.style.background = `linear-gradient(
+    90deg,
+    orange ${value}%,
+    #5457ff ${value}%
+  )`;
+    }
+
+    slider.addEventListener("input", () => {
+        updateReadout();
+        updateSliderColor();
+    });
+
+// initialize on load
+    updateSliderColor();
 
     submitBtn.addEventListener("click", () => {
         slider.disabled = true;
@@ -37,4 +53,3 @@
         diffEl.textContent = `Looks like you were off by about $${error} billion. But hey, cats and dogs both steal the show!`;
     });
 })();
-v

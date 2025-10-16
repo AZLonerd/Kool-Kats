@@ -21,22 +21,46 @@
 </head>
 
 <body>
-    <section>
+    <header>
         <h2>
-            Kool Kats: The Tale of Two Tails
+            <img src="images/paw.png" style="width:25px"> Kool Kats <img src="images/paw.png" style="width:25px">
         </h2>
-        <div class="revenue-image-row">
-            <img src="images/puss-in-boots.png" alt="Cat movie still" class="revenue-image">
-            <img src="images/dug.png" alt="Dog movie still" class="revenue-image">
+    </header>
+    <div style="height: 40px;"></div>
+    <section>
+
+        <div class="intro-image-row">
+            <img src="images/life-of-pets.png" alt="Cat movie still" class="intro-image">
         </div>
     </section>
     <!--DANIELS SECTION-->
 
+
+
+
+    <!--Movie yapping + images-->
+    <section class="revenue-intro">
+        <h4> Introduction: Movie Statistics </h4>
+        <p>
+            Whether they star as a furriendly fuzzball or crrrageous companion, cats and dogs have been featured in movies
+            as early as the 19th century! Through their close relationship with humans, cats and dogs have made an appearance
+            in thousands of movies and TV shows, acting in roles as funny, intelligent, and cute creatures!
+        </p>
+
+        <div class="revenue-image-row">
+            <img src="images/cat-movie.png" alt="Cat movie still" class="revenue-image">
+            <img src="images/dog-movie.png" alt="Dog movie still" class="revenue-image">
+        </div>
+
+
+
+    </section>
+
+    <h4> American Cinema: Cats vs. Dogs </h4>
     <!--GUESS REVENUE-->
     <section class="revenue-guess-section container my-4">
-        <h4> American Cinema: Cats vs. Dogs </h4>
         <p class="revenue-guess-subtitle">
-            Out of the <strong>$5.43&nbsp;billion</strong> earned by the top 15 grossing <strong>cat and dog films</strong>, how would you split the total between felines and canines?
+            Out of the <strong>$5.43&nbsp;billion total </strong> earned by the top 15 grossing <strong>pet films</strong>, how much revenue do you think is made by movies featuring <strong>cats</strong> versus <strong>dogs</strong>?
         </p>
 
         <div class="revenue-guess-widget">
@@ -52,27 +76,12 @@
             <button id="revenue-guess-submit" class="revenue-guess-submit">Submit guess</button>
 
             <div id="revenue-guess-result" class="revenue-guess-result" hidden>
-                <p><strong>Answer:</strong> Cats = $1.50B, Dogs = $3.93B</p>
+                <p><strong>Answer:</strong></p>
+                <p>Cat Movies = $1.50B</p>
+                <p>Dog Movies = $3.93B</p>
                 <p id="revenue-guess-diff"></p>
             </div>
         </div>
-    </section>
-
-    <!--Movie yapping + images-->
-    <section class="revenue-intro">
-        <p>
-            Whether they star as a furriendly fuzzball or crrrageous companion, cats and dogs have been featured in movies
-            as early as the 19th century! Through their close relationship with humans, cats and dogs have made an appearance
-            in thousanfs of movies and TV shows, acting in roles as funny, intelligent, and cute creatures!
-        </p>
-
-        <div class="revenue-image-row">
-            <img src="images/cat-movie.png" alt="Cat movie still" class="revenue-image">
-            <img src="images/dog-movie.png" alt="Dog movie still" class="revenue-image">
-        </div>
-
-
-
     </section>
 
     <!--Movie Revenue Data Vi-->
@@ -101,8 +110,8 @@
 
     <!-- Load data, create visualizations -->
 
-    <script type="module" src="js/MovieRevenueViz.js"></script>
     <script src="js/revenueGuess.js"></script>
     <script type="module" src="js/main.js"></script>
+
 </body>
 </html>
