@@ -1,4 +1,4 @@
-let margin = {top: 40, right: 40, bottom: 80, left: 80};
+let margin = { top: 40, right: 40, bottom: 80, left: 80 };
 
 let width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom; //bad way of doing this hehe -> change to the better ver
@@ -37,7 +37,7 @@ svg.append("text")
 
 let data = [];
 
-d3.select("#ranking-type").on("change", function() {
+d3.select("#ranking-type").on("change", function () {
     updateVisualization();
 });
 
@@ -45,7 +45,7 @@ loadData();
 
 function loadData() {
     d3.csv("data/PetOwnership.csv").then(csv => {
-        csv.forEach(function(d) {
+        csv.forEach(function (d) {
             d.households = +d.households;
             d.total = +d.total;
         });
@@ -70,7 +70,7 @@ function updateVisualization() {
         "Number of Households (millions)" : "Total Number of Pets (millions)";
     svg.select(".axis-label").text(yLabel);
 
-    data.sort(function(a, b) {
+    data.sort(function (a, b) {
         return b[selection] - a[selection];
     });
 
