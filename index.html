@@ -95,7 +95,47 @@
     </section>
 
     <!--ANGS SECTION-->
+
+
     <!--MAYS SECTION-->
+    <!--chat everything i added is not centred but it's just our first prototype so we ball B)-->
+    <!--it's also ugly erm i hate how the bars look i will css yassify it later as well-->
+    <section class="ownership-intro">
+        <h4> Introduction: Ownership and Shelter Statistics </h4>
+        <p>
+            Does media play a role in how Americans choose which pet to own? Let's take a look!
+        </p>
+
+        <div class="ownernship-image-row">
+            <img src="images/catdoghuggies.jpg" alt="Cat dog hugs" class="ownership-image">
+        </div>
+    </section>
+
+    <h4> 2024 AVMA Pet Ownership Statistics </h4>
+    <!--AVMA stats bar graph-->
+    <section>
+        <p>
+            It is undeniable that dogs are the more popular pet in the United States according to 2024 statistics from
+            the American Veterinary Medical Association (AVMA). While this is likely not a casual relationship, there does seem
+            to be some correlation.
+        </p>
+        <!--selection-->
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="ranking-type">Group by</label>
+                <select class="form-control" id="ranking-type">
+                    <option value="households">Number of US Households Owning Cats vs Dogs (in millions)</option>
+                    <option value="total">Total Number of Cats vs Dogs in the US (in millions)</option>
+                </select>
+            </div>
+        </form>
+
+        <div id="ownership-viz"></div>
+    </section>
+
+    <!--map viz that's hard :( will do this tmr-->
+
+
     <!--JOSHS SECTION-->
 
 
@@ -112,6 +152,8 @@
 
     <script src="js/revenueGuess.js"></script>
     <script type="module" src="js/main.js"></script>
+
+    <script src="js/PetOwnershipViz.js"></script>
 
 </body>
 </html>
