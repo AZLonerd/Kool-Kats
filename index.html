@@ -124,22 +124,17 @@
             <p id="feedback" style="font-weight: bold; margin-top: 10px;"></p>
             <h1>Average movie ratings for cats and dogs</h1>
 
-            <!-- Select box to choose the ranking type -->
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="ranking-type2">Group by</label>
-                    <select id="ranking-type2" onchange="updateVisualization()">
+                    <label for="ranking-type2" style="display: none;">Group by</label>
+                    <select style="display:none" id="ranking-type2" onchange="updateVisualization()">
                         <option value="stores">Rating</option>
 
                     </select>
 
-                    <!-- Activity IV -->
-                    <!--<button type="button" class="btn btn-link" id="change-sorting"><i class="glyphicon glyphicon-sort"></i> Sort</button>-->
                 </div>
             </form>
-            <button id="change-sorting">Reverse Sort</button>
 
-            <!-- Parent container for the visualization -->
             <div id="chart-area"></div>
 
         </div>
@@ -154,9 +149,8 @@
         <p>I will use a pie chart for the amount of cats/dogs entity in youtube videos
             and tiktok videos tagged with cats vs dogs
         </p>
-
-        </p>
-        <p></p>
+        <div style="width: 200px; height:200px; background-color: red; border-radius: 50%;margin: auto;">pie chart
+            placeholder</div>
     </div>
 
 
@@ -249,7 +243,6 @@
     <script type="module" src="js/Angbar.js"></script>
     <script src="js/PetOwnershipViz.js" type="module"></script>
 
-    <script src="js/PetOwnershipViz.js"></script>
     <script src="js/ShelterAvgsViz.js"></script>
 
 </body>
