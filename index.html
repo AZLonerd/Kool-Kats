@@ -42,8 +42,10 @@
     <section class="revenue-intro">
         <h4> Introduction: Movie Statistics </h4>
         <p>
-            Whether they star as a furriendly fuzzball or crrrageous companion, cats and dogs have been featured in movies
-            as early as the 19th century! Through their close relationship with humans, cats and dogs have made an appearance
+            Whether they star as a furriendly fuzzball or crrrageous companion, cats and dogs have been featured in
+            movies
+            as early as the 19th century! Through their close relationship with humans, cats and dogs have made an
+            appearance
             in thousands of movies and TV shows, acting in roles as funny, intelligent, and cute creatures!
         </p>
 
@@ -60,12 +62,15 @@
     <!--GUESS REVENUE-->
     <section class="revenue-guess-section container my-4">
         <p class="revenue-guess-subtitle">
-            Out of the <strong>$5.43&nbsp;billion total </strong> earned by the top 15 grossing <strong>pet films</strong>, how much revenue do you think is made by movies featuring <strong>cats</strong> versus <strong>dogs</strong>?
+            Out of the <strong>$5.43&nbsp;billion total </strong> earned by the top 15 grossing <strong>pet
+                films</strong>, how much revenue do you think is made by movies featuring <strong>cats</strong> versus
+            <strong>dogs</strong>?
         </p>
 
         <div class="revenue-guess-widget">
             <div class="revenue-guess-slider-wrap">
-                <input id="revenue-guess-slider" class="revenue-guess-slider" type="range" min="0" max="100" value="50" step="1" />
+                <input id="revenue-guess-slider" class="revenue-guess-slider" type="range" min="0" max="100" value="50"
+                    step="1" />
             </div>
 
             <div class="revenue-guess-readout">
@@ -87,7 +92,8 @@
     <!--Movie Revenue Data Vi-->
     <section>
         <p>
-            Let's explore how cats and dogs have performed at the box office. In the past 50 years, here are the top 15 highest
+            Let's explore how cats and dogs have performed at the box office. In the past 50 years, here are the top 15
+            highest
             grossing films either showing a cat or a dog as a predominant figure:
         </p>
         <h4>Top 15 Grossing Films with a Predominant Cat or Dog</h4>
@@ -95,6 +101,63 @@
     </section>
 
     <!--ANGS SECTION-->
+
+    <h4>Cats and dogs are very popular in movies</h4>
+    <div class="container">
+
+        <div class="descriptions">
+            <p>
+                From movies like Mr.peabody and Sherman and shows like Family Guy, dogs have been
+                entertaining audiences for decades! Cats are similar, there are also many movies and shows
+                relate to cats like Puss in Boots and Garfields. So here is the real question for you: which
+                animal has higher average movie ratings?
+            </p>
+            <h2>Do you think dogs or cats have higher ratings?</h2>
+            <div class="answer-choices">
+                <button class="ans-btn">Cats</button>
+                <button class="ans-btn">Dogs</button>
+            </div>
+            <button class="reveal-btn">Reveal Answer</button>
+        </div>
+
+        <div class="movie-ratings" style="display: none;">
+            <p id="feedback" style="font-weight: bold; margin-top: 10px;"></p>
+            <h1>Average movie ratings for cats and dogs</h1>
+
+            <!-- Select box to choose the ranking type -->
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="ranking-type2">Group by</label>
+                    <select id="ranking-type2" onchange="updateVisualization()">
+                        <option value="stores">Rating</option>
+
+                    </select>
+
+                    <!-- Activity IV -->
+                    <!--<button type="button" class="btn btn-link" id="change-sorting"><i class="glyphicon glyphicon-sort"></i> Sort</button>-->
+                </div>
+            </form>
+            <button id="change-sorting">Reverse Sort</button>
+
+            <!-- Parent container for the visualization -->
+            <div id="chart-area"></div>
+
+        </div>
+    </div>
+
+
+
+    <div>
+        <h4>Presense of Dogs and cats in social media</h4>
+
+        <p>we will add winner 3 sketch here</p>
+        <p>I will use a pie chart for the amount of cats/dogs entity in youtube videos
+            and tiktok videos tagged with cats vs dogs
+        </p>
+
+        </p>
+        <p></p>
+    </div>
 
 
     <!--MAYS SECTION-->
@@ -116,7 +179,8 @@
     <section class="AVMA-stats-house">
         <p>
             It is undeniable that dogs are the more popular pet in the United States according to 2024 statistics from
-            the American Veterinary Medical Association (AVMA). While this is likely not a casual relationship, there does seem
+            the American Veterinary Medical Association (AVMA). While this is likely not a casual relationship, there
+            does seem
             to be some correlation.
         </p>
         <!--selection-->
@@ -182,9 +246,12 @@
 
     <script src="js/revenueGuess.js"></script>
     <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/Angbar.js"></script>
+    <script src="js/PetOwnershipViz.js" type="module"></script>
 
     <script src="js/PetOwnershipViz.js"></script>
     <script src="js/ShelterAvgsViz.js"></script>
 
 </body>
+
 </html>
