@@ -139,6 +139,7 @@ export function renderMovieRevenueViz(containerId = "#movie-ratings-viz") {
             .attr("dy", 1)
             .attr("text-anchor", "middle")
             .style("font-size", "9px")
+            .style("fill", "#ffffff")
             .style("user-select", "none")
             .style("pointer-events", "none")
             .text(d => truncateText(d.title, d.r * 1.59));

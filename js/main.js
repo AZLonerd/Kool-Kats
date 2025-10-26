@@ -1,6 +1,9 @@
 import { renderMovieRevenueViz } from "./MovieRevenueViz.js";
+import { renderAnimalPairViz } from "./RenderAnimalPairViz.js";
 
 renderMovieRevenueViz();
+renderAnimalPairViz();
+
 window.addEventListener("scroll", function () {
     const header = document.querySelector("header");
     const fadeStart = 0;
