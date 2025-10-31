@@ -26,7 +26,7 @@ export function renderMovieRevenueViz(containerId = "#movie-ratings-viz") {
     const caption = container.append("div")
         .attr("class", "caption")
         .style("position", "absolute")
-        .style("bottom", "30px")
+        .style("bottom", "65px")
         .style("width", "100%")
         .style("text-align", "center")
         .style("font-weight", "700")
@@ -43,7 +43,8 @@ export function renderMovieRevenueViz(containerId = "#movie-ratings-viz") {
     d3.csv("../data/MovieRevenue.csv", d => ({
         category: d.Category,
         title: d.Title,
-        revenue: +d.Revenue
+        revenue: +d.Revenue,
+        description: d.Description
     })).then(data => {
         const cat = data.filter(d => d.category === "Cat");
         const dog = data.filter(d => d.category === "Dog");
@@ -171,7 +172,14 @@ export function renderMovieRevenueViz(containerId = "#movie-ratings-viz") {
             if (!d.showingRevenue) {
                 circle.attr("fill", c.selected).attr("stroke", "black").attr("stroke-width", 1);
                 text.text(`${Math.floor(d.revenue / 1_000_000)}M`);
-                caption.html(`${d.title} — $${Math.floor(d.revenue / 1_000_000)} Million`);
+                caption.html(`
+                  <div style="font-weight:700; color:#111; font-size:16px;">
+                    ${d.title} — $${Math.floor(d.revenue / 1_000_000)} Million
+                  </div>
+                  <div style="font-size:12px; color:#555; font-weight:400; max-width:600px; margin:4px auto; line-height:1.3;">
+                    ${d.description || "No description available."}
+                  </div>
+                `);
                 d.showingRevenue = true;
                 selected = d;
             } else {

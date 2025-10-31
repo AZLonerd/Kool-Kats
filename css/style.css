@@ -21,7 +21,7 @@ h4 {
 }
 
 header {
-    background-color: #5457ff;
+    background-color: #afb1ff;
     position: fixed;
     top: 0;
     left: 0;
@@ -67,6 +67,7 @@ h2 {
     justify-content: center;
     gap: 1.5rem;
     flex-wrap: wrap;
+    margin: 30px;
 }
 
 .revenue-image {

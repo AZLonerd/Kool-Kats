@@ -11,26 +11,27 @@
 
     if (!slider) return;
 
-    function fmtBillions(n) {
-        return `$${(n / 1000000000).toFixed(2)}B`;
+    function fmtBillions(n, color) {
+        return `<b style="color:${color}">$${(n / 1000000000).toFixed(2)} Billion</b>`;
     }
 
     function updateReadout() {
         const cats = TOTAL * (Number(slider.value) / 100);
         const dogs = TOTAL - cats;
-        catsEl.textContent = fmtBillions(cats);
-        dogsEl.textContent = fmtBillions(dogs);
+        catsEl.innerHTML = fmtBillions(cats, "orange");
+        dogsEl.innerHTML = fmtBillions(dogs, "#5457ff");
     }
 
     slider.addEventListener("input", updateReadout);
     updateReadout();
+
     function updateSliderColor() {
         const value = slider.value;
         slider.style.background = `linear-gradient(
-    90deg,
-    orange ${value}%,
-    #5457ff ${value}%
-  )`;
+            90deg,
+            orange ${value}%,
+            #5457ff ${value}%
+        )`;
     }
 
     slider.addEventListener("input", () => {
@@ -38,7 +39,7 @@
         updateSliderColor();
     });
 
-// initialize on load
+    // initialize on load
     updateSliderColor();
 
     submitBtn.addEventListener("click", () => {
@@ -50,6 +51,12 @@
         resultBox.hidden = false;
         setTimeout(() => resultBox.classList.add("visible"), 10);
 
-        diffEl.textContent = `Looks like you were off by about $${error} billion. But hey, cats and dogs both steal the show!`;
+        diffEl.innerHTML = `
+            Looks like you were off by about <b>$${error} billion</b>.<br><br>
+            <b>What this means:</b> among the <b>top 15 highest-grossing films</b> featuring either a cat or a dog,<br>
+            <b style="color:#5457ff;">dog-centered movies</b> collectively earned about 
+            <b style="color:#5457ff;">$2.43 billion</b> more than 
+            <b style="color:orange;">cat-centered ones</b>!
+        `;
     });
 })();
