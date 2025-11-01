@@ -1,8 +1,16 @@
 function ProductCountViz() {
-    const outerW = 1000, outerH = 420;
-    const margin = {top: 70, right: 30, bottom: 40, left: 30};
-    const width = outerW - margin.left - margin.right;
-    const height = outerH - margin.top - margin.bottom;
+    d3.csv("data/ProductTradeAmount.csv").then(data => {
+        const catRow = data.find(d => d.Animal === "Cat");
+        const dogRow = data.find(d => d.Animal === "Dog");
+        const catValue = +catRow.TradeAmountCount;
+        const dogValue = +dogRow.TradeAmountCount;
+        buildViz(catValue, dogValue);
+    });
+}
+
+function buildViz(catValue, dogValue) {
+    const outerW = 1000, outerH = 500;
+    const margin = {top: 70, right: 30, bottom: 60, left: 60};
 
     const nCols = 7, nRows = 6;
     const cellW = 50, cellH = 50;
@@ -14,15 +22,8 @@ function ProductCountViz() {
     const gridsOffsetX = (outerW - totalGridWidth) / 2 + 50;
     const gridsOffsetY = margin.top + 50;
 
-    const handleTopY = gridsOffsetY - 60;
-    const handleLeftX = gridsOffsetX;
-    const handleRightX = gridsOffsetX + gridW * 2 + gridSpacing;
-    const handleMidX = (handleLeftX + handleRightX) / 2;
-    const basketPath = `M${handleLeftX}, ${gridsOffsetY - 5}
-        Q${handleMidX}, ${handleTopY} ${handleRightX}, ${gridsOffsetY - 5}`;
 
-    let catValue = 347;
-    let dogValue = 659;
+
 
     let dogViz = false;
     let catViz = false;
@@ -335,50 +336,3 @@ function ProductCountViz() {
 }
 
 export default ProductCountViz
-
-
-//
-// const margin = {top: 40, right: 40, bottom: 40, left: 40 };
-// const width = 800 - margin.left - margin.right;
-// const height = 420;
-//
-//
-// let svg = d3.select("#shopping-cart-viz").append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom);
-//
-// svg.append("rect")
-//     .attr("x", 0).attr("y", 0)
-//     .attr("width", +svg.attr("width"))
-//     .attr("height", +svg.attr("height"))
-//     .attr("fill", "none")
-//     .attr("stroke", "#bbb")
-//     .attr("stroke-dasharray", "4 4");
-//
-//
-// svg.append("text")
-//     .attr("x", width / 2)
-//     .attr("y", margin.top - 20)
-//     .attr("text-anchor", "middle")
-//     .text("Trade Amount Count: Cat vs Dog");
-//
-// const imgSources = [
-//     "images/image0.png",
-//     "images/image1.png",
-//     "images/image2.png",
-// ]
-//
-// let imgI = 0;
-//
-// const img = svg.append("image")
-//     .attr("x", margin.left)
-//     .attr("y", margin.top)
-//     .attr("width", width)
-//     .attr("height", height)
-//     .attr("href", imgSources[imgI]);
-//
-// img.style("cursor", "pointer")
-//     .on("click", () => {
-//         imgI = (imgI + 1) % imgSources.length;
-//         img.attr("href", imgSources[imgI]);
-//     })
