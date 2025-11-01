@@ -12,8 +12,8 @@ function buildViz(catValue, dogValue) {
     const outerW = 1000, outerH = 500;
     const margin = {top: 70, right: 30, bottom: 60, left: 60};
 
-    const nCols = 7, nRows = 6;
-    const cellW = 50, cellH = 50;
+    const nCols = 8, nRows = 6;
+    const cellW = 45, cellH = 45;
     const gridW = nCols * cellW;
     const gridH = nRows * cellH;
 
@@ -21,8 +21,6 @@ function buildViz(catValue, dogValue) {
     const totalGridWidth = gridW * 2 + gridSpacing + 50;
     const gridsOffsetX = (outerW - totalGridWidth) / 2 + 50;
     const gridsOffsetY = margin.top + 50;
-
-
 
 
     let dogViz = false;
@@ -50,6 +48,15 @@ function buildViz(catValue, dogValue) {
         .style("box-shadow", "0 2px 6px rgba(0,0,0,0.15)")
         .style("opacity", 0);
     const containerNode = container.node();
+
+    const catSim = d3.forceSimulation()
+        .alphaDecay(0.02)
+        .velocityDecay(0.4)
+        .stop();
+    const dogSim = d3.forceSimulation()
+        .alphaDecay(0.02)
+        .velocityDecay(0.4)
+        .stop();
 
 
     svg.append("text")
@@ -186,13 +193,14 @@ function buildViz(catValue, dogValue) {
         .attr("text-anchor", "middle")
         .text("Cats");
     gridsG.append("text")
-        .attr("x", gridW + 120 + gridW / 2)
+        .attr("x", gridW + 140 + gridW / 2)
         .attr("y", gridH + 28)
         .attr("text-anchor", "middle")
         .text("Dogs");
 
-    const handleHeight = 45;
-    const inset = 25;
+
+    const handleHeight = 50;
+    const inset = 75;
     const cornerRadius = 10;
     const catBaseY = gridsOffsetY - 5;
     const catGridLeft = gridsOffsetX;
@@ -251,78 +259,137 @@ function buildViz(catValue, dogValue) {
             .attr("rx", 4)
             .attr("ry", 4);
 
-        for (let c = 1; c < nCols; c++) {
-            g.append("line")
-                .attr("x1", x).attr("y1", y + c * cellW)
-                .attr("x2", x + w).attr("y2", y + c * cellW)
-                .attr("stroke", "#999").attr("stroke-width", .5);
-        }
         for (let r = 1; r < nRows; r++) {
+            const yLine = y + r * cellH;
             g.append("line")
-                .attr("x1", x).attr("y1", y + r * cellH)
-                .attr("x2", x + w).attr("y2", y + r * cellH)
-                .attr("stroke", "#999").attr("stroke-width", 0.5);
+                .attr("class", "basket-gridlines")
+                .attr("x1", x)
+                .attr("y1", yLine)
+                .attr("x2", x + w)
+                .attr("y2", yLine)
+                .attr("stroke", "#aaa")
+                .attr("stroke-width", 0.8)
+                .attr("stroke-opacity", 0.6);
+
+            const yMid = yLine - cellH / 2;
+            g.append("line")
+                .attr("class", "basket-gridlines")
+                .attr("x1", x)
+                .attr("y1", yMid)
+                .attr("x2", x + w)
+                .attr("y2", yMid)
+                .attr("stroke", "#ccc")
+                .attr("stroke-width", 0.8)
+                .attr("stroke-opacity", 0.6);
+        }
+
+        const weaveCount = nCols * 2;
+        for (let i = 1; i < weaveCount; i++) {
+            const vx = x + (i * w) / weaveCount;
+            g.append("line")
+                .attr("class", "basket-gridlines")
+                .attr("x1", vx)
+                .attr("y1", y)
+                .attr("x2", vx)
+                .attr("y2", y + h)
+                .attr("stroke", i % 2 === 0 ? "#aaa" : "#ccc")
+                .attr("stroke-width", 0.8)
+                .attr("stroke-opacity", 0.6);
         }
     }
 
     function valueToRowCount(v) {
-        const p = Math.max(0, Math.min(1, v/maxValue));
+        const p = Math.max(0, Math.min(1, v / maxValue));
         return Math.round(p * nRows);
     }
 
     function dropIntoGrid(a) {
         if (a === "cat") {
             catViz = true;
-            const rowfill = valueToRowCount(catValue);
-            catCircles = buildCircles(rowfill);
-            renderCircles("#cat-grid", catCircles, "#f4a261");
-        }
-        else {
+            const nodes = buildCircles(
+                catValue,
+                0,
+                0,
+                gridW,
+                gridH,
+                "#f4a261"
+            );
+
+            catCircles = nodes;
+            renderCircles("#cat-grid", nodes);
+            startBasketSim(catSim, nodes, gridW, gridH);
+        } else {
             dogViz = true;
-            const rowfill = valueToRowCount(dogValue);
-            dogCircles = buildCircles(rowfill);
-            renderCircles("#dog-grid", dogCircles, "#457b9d");
+            const nodes = buildCircles(
+                dogValue,
+                0,
+                0,
+                gridW,
+                gridH,
+                "#457b9d"
+            );
+            dogCircles = nodes;
+            renderCircles("#dog-grid", nodes);
+            startBasketSim(dogSim, nodes, gridW, gridH);
         }
+
+        svg.selectAll(".basket-gridlines").raise();
     }
 
-    function buildCircles(rowfill) {
-        const data = [];
-        for (let r = 0; r < rowfill; r++) {
-            for (let c = 0; c < nCols; c++) {
-                data.push({
-                    cx: c * cellW + cellW / 2,
-                    cy: (nRows - 1 - r) * cellH + cellH / 2
-                });
-            }
-        }
-        return data;
+    function buildCircles(value, basketX, basketY, basketW, basketH, color) {
+        const p = Math.max(0, Math.min(1, value / maxValue));
+        const maxBalls = 75;
+        const count = Math.max(15, Math.round(p * maxBalls));
+        const r = Math.min(cellW, cellH) / 2 - 5;
+
+        return d3.range(count).map(i => ({
+            x: basketX + Math.random() * basketW,
+            y: basketY - 60 - Math.random() * 80,
+            vy: 0,
+            r,
+            color
+        }));
     }
 
-    function renderCircles(gridSelect, data, color) {
-        const circles = d3.select(gridSelect)
-            .selectAll("circle.filled")
-            .data(data, (d, i) => i);
+    function renderCircles(gridSelect, nodes) {
+        const g = d3.select(gridSelect);
+
+        const circles = g.selectAll("circle.filled")
+            .data(nodes);
+
         circles.exit().remove();
 
         const enter = circles.enter()
             .append("circle")
             .attr("class", "filled")
-            .attr("cx", d => d.cx)
-            .attr("cy", 0)
-            .attr("r", 0)
-            .attr("fill", color)
-            .attr("fill-opacity", .9);
+            .attr("r", d => d.r)
+            .attr("fill", d => d.color)
+            .merge(circles)
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y);
+    }
 
-        enter.transition()
-            .duration(400)
-            .attr("cy", d => d.cy)
-            .attr("r", cellW / 2 - 4);
-        circles.transition()
-            .duration(300)
-            .attr("cx", d => d.cx)
-            .attr("cy", d => d.cy)
-            .attr("r", cellW / 2 - 4)
-            .attr("fill", color);
+    function startBasketSim(sim, nodes, basketW, basketH) {
+        const r = Math.min(cellW, cellH) / 2 - 4;
+
+        sim.nodes(nodes)
+            .force("collide", d3.forceCollide().radius(d => d.r + 1).iterations(2))
+            .force("gravity", d3.forceY(basketH - r - 2).strength(0.06))
+            .force("x", d3.forceX(basketW / 2).strength(0.02))
+            .on("tick", () => {
+                nodes.forEach(n => {
+                    if (n.y > basketH - n.r - 2) n.y = basketH - n.r - 2;
+                    if (n.y < n.r) n.y = n.r;
+                    if (n.x < n.r) n.x = n.r;
+                    if (n.x > basketW - n.r) n.x = basketW - n.r;
+                });
+
+                d3.selectAll("#cat-grid circle.filled, #dog-grid circle.filled")
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y);
+            })
+            .alpha(1)
+            .restart();
     }
 
     function resetGrids() {
@@ -332,6 +399,9 @@ function buildViz(catValue, dogValue) {
         dogCircles = [];
         dogViz = false;
         catViz = false;
+        catSim.stop();
+        dogSim.stop();
+        tooltip.style("opacity", 0);
     }
 }
 
