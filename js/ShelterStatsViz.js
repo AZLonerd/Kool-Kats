@@ -85,7 +85,7 @@ class ShelterStatsViz {
         // legend
         vis.legend = vis.svg.append("g")
             .attr('class', 'legend')
-            .attr('transform', `translate(${(vis.width + vis.margin.left + vis.margin.right) / 2 - 100}, ${vis.height + vis.margin.top + 40})`); // FIXED: rlly close
+            .attr('transform', `translate(${(vis.width + vis.margin.left + vis.margin.right) / 2 - 100}, ${vis.height + vis.margin.top + 25})`); // FIXED: rlly close
         vis.wrangleData();
     }
 
@@ -190,7 +190,7 @@ class ShelterStatsViz {
             })
             .on('mouseout', function() {
                 d3.select(this)
-                    .attr('stroke', 'white')
+                    .attr('stroke', 'black')
                     .attr('stroke-width', 1);
 
                 vis.tooltip.style("opacity", 0);
@@ -229,8 +229,9 @@ class ShelterStatsViz {
             .attr('x', legendWidth / 2)
             .attr('y', -8)
             .attr('text-anchor', 'middle')
-            .style('font-size', '12px')
+            .style('font-size', '14px')
             .style('font-weight', 'bold')
+            .style('fill', '#000')
             .text('Value Range');
 
         //little rect for it
@@ -238,24 +239,35 @@ class ShelterStatsViz {
             .attr('width', legendWidth)
             .attr('height', legendHeight)
             .style('fill', 'url(#legend-gradient)')
-            .attr('stroke', '#999')
-            .attr('stroke-width', 0.5);
+            .attr('stroke', '#000')
+            .attr('stroke-width', 1);
 
-        //labels
-        const extent = vis.colorScale.domain();
+        //labels - get actual data extent
+        let values = vis.shelterData.map(d => {
+            if (vis.currentView === 'cats') return +d['Average Cat Adoptions'];
+            if (vis.currentView === 'dogs') return +d['Average Dog Adoptions'];
+            return +d['ratio (Cat:Dog)'];
+        }).filter(v => !isNaN(v));
+
+        const minValue = d3.min(values);
+        const maxValue = d3.max(values);
 
         vis.legend.append('text')
             .attr('x', 0)
-            .attr('y', legendHeight + 15)
-            .style('font-size', '11px')
-            .text(extent[0].toFixed(vis.currentView === 'ratio' ? 2 : 0));
+            .attr('y', legendHeight + 18)
+            .style('font-size', '13px')
+            .style('fill', '#000')
+            .style('font-weight', 'bold')
+            .text(minValue.toFixed(vis.currentView === 'ratio' ? 2 : 0));
 
         vis.legend.append('text')
             .attr('x', legendWidth)
-            .attr('y', legendHeight + 15)
+            .attr('y', legendHeight + 18)
             .attr('text-anchor', 'end')
-            .style('font-size', '11px')
-            .text(extent[1].toFixed(vis.currentView === 'ratio' ? 2 : 0));
+            .style('font-size', '13px')
+            .style('fill', '#000')
+            .style('font-weight', 'bold')
+            .text(maxValue.toFixed(vis.currentView === 'ratio' ? 2 : 0));
     }
 }
 
@@ -287,6 +299,4 @@ Promise.all([
             shelterViz.changeView(viewType);
         }
     });
-}).catch(error => {
-    console.error('Error loading data:', error);
 });
