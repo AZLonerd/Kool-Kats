@@ -71,7 +71,8 @@
     <section class="revenue-guess-section container my-4">
         <p class="revenue-guess-subtitle">
             Out of the <strong>$5.43&nbsp;billion total </strong> earned by the top 15 grossing <strong>pet
-                films</strong>, how much revenue do you think is made by movies featuring <strong>cats</strong> versus movies featuring
+                films</strong>, how much revenue do you think is made by movies featuring <strong>cats</strong> versus
+            movies featuring
             <strong>dogs</strong>?
         </p>
 
@@ -132,7 +133,6 @@
         <div class="movie-ratings" style="display: none;">
             <p id="feedback" style="font-weight: bold; margin-top: 10px;"></p>
             <h1>Average movie ratings for cats and dogs</h1>
-
             <form class="form-inline">
                 <div class="form-group">
                     <label for="ranking-type2" style="display: none;">Group by</label>
@@ -151,7 +151,7 @@
 
 
 
-    <div>
+    <!-- <div>
         <h4>Presense of Dogs and cats in social media</h4>
         <div style="width:70%; background-color: white; margin:auto">
             <p>Cats and dogs are both popular social media animals because they are
@@ -175,7 +175,35 @@
                 placeholder</div>
 
         </div>
+    </div> -->
+
+
+    <div>
+        <h4 style="margin-top: 80px; margin-bottom: 80px;">Presence of Dogs and Cats in Social Media</h4>
+        <div id="dashboard" style="width: 70%; background-color: white; margin: auto; padding: 20px;">
+            <p>
+                Cats and dogs are both popular social media animals because they are
+                adorable! many people own cats or dogs in the United States
+                so it is common for them to post their favorite pet on social media!
+                from longer video platforms like youtube to short video social media like instagram
+                and tiktok, cats and dogs are everywhere!
+                so the real question is, how popular are cats and dogs in social media?
+            </p>
+
+
+            <h4 style="margin-top: 20px;">TikTok and Instagram videos tagged with Cats vs Dogs</h4>
+            <div id="tree-chart" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+
+
+            <div id="donut-charts"
+                style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 20px;">
+            </div>
+            <div id="donut-description" style="text-align: center; margin-top: 15px; font-size: 20px; color: #333;">
+            </div>
+
+        </div>
     </div>
+
 
 
     <!--MAYS SECTION-->
@@ -278,6 +306,7 @@
     <script type="module" src="js/Angbar.js"></script>
     <script src="js/PetOwnershipViz.js" type="module"></script>
     <script src="js/ShelterAvgsViz.js"></script>
+    <script src="js/AngSocialMedia.js"></script>
 
 </body>
 

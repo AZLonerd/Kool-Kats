@@ -196,7 +196,6 @@ h2 {
 
 .reveal-btn:hover {
     background-color: #8B8000;
-
 }
 
 #change-sorting {
@@ -218,4 +217,45 @@ footer {
     text-align: center;
     margin-top: 3rem;
     color: #888;
+}
+
+
+/* Ang's css animation */
+
+
+
+@keyframes emoji-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.cat-emoji-anim {
+    animation: emoji-bounce 0.6s infinite ease-in-out;
+}
+
+.dog-emoji-anim {
+    animation: emoji-bounce 0.6s infinite ease-in-out;
+}
+
+.tree-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 6px;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.tree-btn:hover {
+    background-color: #5CA0D3;
+    transform: scale(1.05);
 }
