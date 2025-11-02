@@ -1,10 +1,12 @@
 import { renderMovieRevenueViz } from "./MovieRevenueViz.js";
 import { renderAnimalPairViz } from "./RenderAnimalPairViz.js";
 import ProductCountViz from "./ProductCountViz.js";
+import ProductCountViz2 from "./ProductCountViz2.js";
 
 renderMovieRevenueViz();
 renderAnimalPairViz();
 ProductCountViz();
+ProductCountViz2();
 
 window.addEventListener("scroll", function () {
     const header = document.querySelector("header");

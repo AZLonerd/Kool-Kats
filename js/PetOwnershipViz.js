@@ -9,6 +9,18 @@ let svg = d3.select("#ownership-viz").append("svg")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+let tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .attr("id", "ownership-tooltip")
+    .style("opacity", 0)
+    .style("position", "absolute")
+    .style("background-color", "white")
+    .style("border", "1px solid #ddd")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+    .style("pointer-events", "none")
+    .style("box-shadow", "0 2px 4px rgba(0,0,0,0.2)");
+
 let x = d3.scaleBand()
     .rangeRound([0, width])
     .paddingInner(0.2);
@@ -90,6 +102,22 @@ function updateVisualization() {
         .attr("height", 0)
         .attr("fill", d => getColor(d.pet)) //dog should be blue cat orange
         .merge(bars)
+        .on("mouseover", function(event, d) {
+            tooltip.transition()
+                .duration(200)
+                .style("opacity", 1);
+        })
+        .on("mousemove", function(event, d) {
+            tooltip
+                .html(`<strong>${d.pet}</strong><br/>${yLabel}: <strong>${d[selection].toFixed(1)}M</strong>`)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", function(event, d) {
+            tooltip.transition()
+                .duration(500)
+                .style("opacity", 0);
+        })
         .transition()
         .duration(500)
         .attr("x", d => x(d.pet))

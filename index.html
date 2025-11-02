@@ -40,7 +40,7 @@
 
     <!--Movie yapping + images-->
     <section class="revenue-intro">
-        <h4> Introduction: Movie Statistics </h4>
+        <h4> Movie Statistics </h4>
         <p>
             Whether they star as a furriendly fuzzball or crrrageous companion, cats and dogs have been featured in
             movies
@@ -210,7 +210,7 @@
     <!--chat everything i added is not centred but it's just our first prototype so we ball B)-->
     <!--it's also ugly erm i hate how the bars look i will css yassify it later as well-->
     <section class="ownership-intro">
-        <h4> Introduction: Ownership and Shelter Statistics </h4>
+        <h4> Ownership and Shelter Statistics </h4>
         <p>
             Does media play a role in how Americans choose which pet to own? Let's take a look!
         </p>
@@ -225,9 +225,9 @@
     <section class="AVMA-stats-house">
         <p>
             It is undeniable that dogs are the more popular pet in the United States according to 2024 statistics from
-            the American Veterinary Medical Association (AVMA). While this is likely not a casual relationship, there
-            does seem
-            to be some correlation.
+            the American Veterinary Medical Association (AVMA). While this is likely not a casual relationship with
+            media representation,
+            there does seem to be some correlation.
         </p>
         <!--selection-->
         <form class="form-inline">
@@ -246,32 +246,44 @@
     <!--map viz that's hard :(-->
     <section class="map-house">
         <p>
-            Shelter stats. This will focus on average cat and dog adoptions to show that cats actually get adopted more
-            than dogs from shelters even though they're not as popular. Means that they're still a key player and it is
-            so unfair how we have Paw Patrol but not Cat Patrol #justiceforcats
-            <br>
-            Also this also means that a lot of dog parents aren't getting them from shelters which shows
-            how when people get dogs they're going for specific characteristics which makes sense given how humans
-            breeded dogs for specific desires which is also sad. #justicefordogs #adoptdontshop
-            <br>
-            Also will be a linked view similar to Lab 7 where you can select different states and see data. It's going
-            to be the best US choropleth map you've ever seen trusttttt. But right now all you get to see is a map
-            of the United States so stay tuned :3
-            <br>
-            Also if I do choropleth do we really want to stick to the orange and blue color scheme...
+            That being said, United States shelter adoption statistics might surprise you! Click the buttons below to
+            switch between different views.
         </p>
 
+        <!--        radio buttons for single selection !-->
+        <div class="shelter-controls">
+            <input type="radio" id="avg-cat" name="shelter-metric" value="avgCat" checked>
+            <label for="avg-cat">Average Cat Adoptions</label>
+
+            <input type="radio" id="avg-dog" name="shelter-metric" value="avgDog">
+            <label for="avg-dog">Average Dog Adoptions</label>
+
+            <input type="radio" id="ratio" name="shelter-metric" value="ratio">
+            <label for="ratio">Ratio (Cat:Dog)</label>
+        </div>
+
+
+        <!-- Map visualization -->
         <div id="shelter-viz"></div>
-    </section>
 
-    <section class="idk-maybe-research">
+        <!-- Bar chart visualization below the map -->
+        <div id="bar-chart-viz" style="margin-top: 10px;"></div>
+
         <p>
-            Maybe put a little research graph here and/or breed info to show how there's a lot more research on dogs and
-            breeds which isn't just because dogs are popular (like they're popular because we fully domesticated them
-            so it makes sense why there's so much research and human-created breeds). So ya that's why the
-            shelter stats might be like that.
+            Even though dogs are the more popular pet, cats are more likely to be adopted from a shelter. We think the
+            reason behind this is because <a
+                href="https://cordis.europa.eu/article/id/442154-why-are-there-so-many-dog-breeds-but-only-a-few-cat-breeds">there
+                are much more dog breeds than cat breeds</a>.
+            Dogs are breeded for specific purposes (that's why there's so many more breeds of dogs!),
+            so it's not unreasonable to think that when someone wants to adopt a dog,
+            they'd rather get a specific breed from a breeder than go to a shelter. (Extra credit: Go ask a cat owner
+            what breed their cat is.
+            They'll likely say something like, "I don't know. Orange." Then ask a dog owner what breed their dog is. We
+            bet that the dog owner will
+            probably know what breed their dog is!)
         </p>
     </section>
+
 
 
     <!--JOSHS SECTION-->
@@ -280,10 +292,29 @@
         <p>
             Data shows that almost twice the number of Dog toys were offered on the Market compared to Cat toys.
         </p>
-
-
         <div id="shopping-cart-viz"></div>
+
+        <p>
+            <br>
+            Additionally, Cat products as a whole tend to be more expensive than Dog products!
+        </p>
         <div id="animal-pairs-viz" style="height:700px; width: full"></div>
+
+
+        <p>
+            <br>
+            Evidently, Cat owners are way disadvantaged compared to Dog owners. But that does not have to be true.
+        </p>
+        <div id="trade-bars-viz"></div>
+        <p>
+            When the Average Trade Amounts are compared, Cat owners actually beat the Dog owners by almost 1.5 times!
+            Although, Cat owners are provided a smaller number of options, they prove to be more dedicated and
+            passionate,
+            buying the same products in higher quantities. Cat owners don't lack love nor care, just the lack of
+            options!
+            With a bit more media attention, and more marketing focus on cats, we can welcome a catty tomorrow, a feline
+            future for all!
+        </p>
 
     </section>
 
@@ -300,12 +331,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 
     <!-- Load data, create visualizations -->
-
     <script src="js/revenueGuess.js"></script>
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/Angbar.js"></script>
     <script src="js/PetOwnershipViz.js" type="module"></script>
-    <script src="js/ShelterAvgsViz.js"></script>
+    <script src="js/TopStatesBarChart.js"></script>
+    <script src="js/ShelterStatsViz.js"></script>
     <script src="js/AngSocialMedia.js"></script>
 
 </body>
