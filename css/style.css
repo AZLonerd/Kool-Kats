@@ -219,3 +219,35 @@ footer {
     margin-top: 3rem;
     color: #888;
 }
+
+.shelter-controls {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.shelter-controls input[type="radio"] {
+    display: none;
+}
+
+.shelter-controls label {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+
+    /* default boring */
+    background-color: #e0e0e0;
+    border: 1px solid #999;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+
+.shelter-controls input[type="radio"]:checked + label {
+    background-color: #5457ff;
+    border-color: #000395;
+    color: white;
+}
