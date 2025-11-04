@@ -21,18 +21,27 @@
 </head>
 
 <body>
-    <header>
-        <h2>
-            <img src="images/paw.png" style="width:30px"> Kool Kats - The Tale of Two Tails <img src="images/paw.png" style="width:30px">
-        </h2>
-    </header>
-    <div style="height: 40px;"></div>
-    <section>
-
-        <div class="intro-image-row">
-            <img src="images/life-of-pets.png" alt="Cat movie still" class="intro-image">
+    <section class="hero-banner">
+        <div class="hero-overlay">
+            <h1>A Tale of Two Tails</h1>
+            <h3>Intro to Information Visualization (CS 4460)</h3>
+            <p>By Daniel Ayoung-Chee, Ziwei “May” Tang, Joshua Lee, and Yuang Zhang</p>
         </div>
     </section>
+
+    <section class="intro-section d-flex align-items-center justify-content-between flex-wrap">
+        <div class="intro-text" style="flex: 1 1 50%; padding: 2rem;">
+            <h3 style="color:#5c5ccc; font-weight:700;">The Tale of Two Tails</h3>
+            <p style="font-size: 20px; line-height: 1.6; color:#333;">
+                From the silver screen to social media and even our shopping carts, cats and dogs have long
+                shared the spotlight in human culture. This page explores how these two beloved companions
+                have shaped our lives — from their roles in blockbuster films to their viral online fame,
+                adoption trends, and the booming pet economy that surrounds them. Scroll through to see how
+                cats and dogs compare across entertainment, ownership, and commerce.
+            </p>
+        </div>
+    </section>
+
     <!--DANIELS SECTION-->
 
 
@@ -100,29 +109,33 @@
 
     <!--Movie Revenue Data Vi-->
     <section>
+        <h4>Top 15 Grossing Films with a Predominant Cat or Dog</h4>
         <p>
             Let's explore how cats and dogs have performed at the box office. In the past 50 years, here are the top 15
             highest
             grossing films either showing a cat or a dog as a predominant figure:
         </p>
-        <h4>Top 15 Grossing Films with a Predominant Cat or Dog</h4>
         <div id="movie-ratings-viz"></div>
+        <p>
+            But box office numbers only tell part of the story; looking at audience
+            ratings helps reveal how well these movies were actually received.
+        </p>
 
     </section>
 
     <!--ANGS SECTION-->
 
-    <h4>Cats and dogs are very popular in movies</h4>
     <div class="container">
 
         <div class="descriptions">
-            <p>
-                From movies like Mr.peabody and Sherman and shows like Family Guy, dogs have been
-                entertaining audiences for decades! Cats are similar, there are also many movies and shows
-                relate to cats like Puss in Boots and Garfields. So here is the real question for you: which
-                animal has higher average movie ratings?
+
+            <h4>Do you think dogs or cats have higher ratings?</h4>
+            <p style="font-size:20px">
+                From movies like <em>Mr. Peabody and Sherman</em> to shows like <em>Family Guy</em>, dogs have been entertaining audiences for decades.
+                Cats have had their fair share of the spotlight too, starring in classics like <em>Puss in Boots</em> and <em>Garfield</em>.
+                So here’s the real question: which animal has the higher average movie rating?
             </p>
-            <h2>Do you think dogs or cats have higher ratings?</h2>
+
             <div class="answer-choices">
                 <button class="ans-btn">Cats</button>
                 <button class="ans-btn">Dogs</button>
@@ -178,31 +191,37 @@
     </div> -->
 
 
-    <div>
-        <h4 style="margin-top: 80px; margin-bottom: 80px;">Presence of Dogs and Cats in Social Media</h4>
+    <div class="container" style="max-width: 60vw; margin: auto; margin-top: 50px; overflow: hidden;">
+        <h4 style="margin:25px">
+            Presence of Dogs and Cats in Social Media
+        </h4>
 
-        <p style="width: 60vw; margin:auto; margin-bottom: 60px;">
-            Cats and dogs are both popular social media animals because they are
-            adorable! many people own cats or dogs in the United States
-            so it is common for them to post their favorite pet on social media!
-            from longer video platforms like youtube to short video social media like instagram
-            and tiktok, cats and dogs are everywhere!
-            so the real question is, how popular are cats and dogs in social media?
+        <p style="max-width: 800px; margin: 0 auto 60px; text-align: center;">
+            Cats and dogs are both popular social media animals because they are adorable!
+            Many people in the United States own cats or dogs, so it’s common for them to
+            post their favorite pet on social media. From longer video platforms like
+            YouTube to short video apps like Instagram and TikTok, cats and dogs are
+            everywhere! So the real question is: how popular are cats and dogs in social media?
         </p>
-        <div id="dashboard" style="width: 70%; background-color: white; margin: auto; padding: 20px;">
 
-            <h4 style="margin-top: 20px;">TikTok and Instagram videos tagged with Cats vs Dogs</h4>
+        <div id="dashboard"
+             style="width: 100%; background-color: white; margin: 0 auto; padding: 20px; box-sizing: border-box; overflow: hidden;">
+
+            <h4 style="margin-top: 2px;">TikTok and Instagram Videos Tagged with Cats vs Dogs</h4>
+
             <div id="tree-chart" style="width: 100%; height: 400px; margin-top: 20px;"></div>
 
-
             <div id="donut-charts"
-                style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 20px;">
+                 style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 20px; width: 100%; box-sizing: border-box;">
             </div>
-            <div id="donut-description" style="text-align: center; margin-top: 15px; font-size: 20px; color: #333;">
+
+            <div id="donut-description"
+                 style="text-align: center; margin-top: 15px; font-size: 20px; color: #333;">
             </div>
 
         </div>
     </div>
+
 
 
 
@@ -216,11 +235,7 @@
         <div class="ownernship-image-row">
             <img src="images/catdoghuggies.jpg" alt="Cat dog hugs" class="ownership-image" style="height: 500px">
         </div>
-    </section>
-
-    <h4> 2024 AVMA Pet Ownership Statistics </h4>
-    <!--AVMA stats bar graph-->
-    <section class="AVMA-stats-house">
+        <h4 style="margin-top: 40px"> 2024 AVMA Pet Ownership Statistics </h4>
         <p>
             It is undeniable that dogs are the more popular pet in the United States according to 2024 statistics from
             the American Veterinary Medical Association (AVMA). While this is likely not a casual relationship with
@@ -230,7 +245,14 @@
         <!--selection-->
         <form class="form-inline">
             <div class="form-group">
-                <label for="ranking-type">Group by</label>
+                <label for="ranking-type"
+                       style="display: block;
+                      text-align: left;
+                      font-weight: bold;
+                      font-size: 18px;">
+                    Group by (Select one):
+                </label>
+
                 <select class="form-control" id="ranking-type">
                     <option value="households">Number of US Households Owning Cats vs Dogs (in millions)</option>
                     <option value="total">Total Number of Cats vs Dogs in the US (in millions)</option>
@@ -250,7 +272,7 @@
             Click the buttons below to
             switch between different views.
             <br>
-            (Note that Average Adoptions = Total adoptions in the state / Total # of shelter organizations in the state.)
+            <p style="color:grey; font-size: 14px">(Note: Average Adoptions = Total adoptions in the state / Total # of shelter organizations in a state.)</p>
         </p>
 
         <!--        radio buttons for single selection !-->
@@ -321,6 +343,38 @@
 
     </section>
 
+    <section class="final-thoughts">
+        <h4>A Furry Future Awaits</h4>
+        <p>
+            From movie screens to social media and the spaces we share every day, cats and dogs have found a
+            way to stay close to our hearts. Their stories make us laugh, comfort us when we’re down, and
+            remind us what it means to care.
+        </p>
+        <p>
+            Whether you’re a cat lover, a dog enthusiast, or both, these animals have shaped our culture in
+            ways that go beyond entertainment. They bring people together, spark kindness, and make the
+            world a little brighter.
+        </p>
+        <p style="font-weight:600; color:#5c5ccc;">
+            So go give your pet a hug, visit a local shelter, or share a story that makes someone smile.
+            Every small act of care keeps the tale of two tails going strong.
+        </p>
+    </section>
+
+    <footer class="site-footer">
+        <p>
+            <strong>Intro to Information Visualization (CS&nbsp;4460-B)</strong><br>
+            Professor&nbsp;Yalong&nbsp;Yang<br>
+            <span class="student-names">
+      Daniel&nbsp;Ayoung-Chee &nbsp;|&nbsp;
+      Ziwei&nbsp;“May”&nbsp;Tang &nbsp;|&nbsp;
+      Joshua&nbsp;Lee &nbsp;|&nbsp;
+      Yuang&nbsp;Zhang
+    </span>
+        </p>
+    </footer>
+
+
 
 
     <!-- Load JS libraries -->
@@ -341,6 +395,27 @@
     <script src="js/TopStatesBarChart.js"></script>
     <script src="js/ShelterStatsViz.js"></script>
     <script src="js/AngSocialMedia.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll("section, .container");
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach((entry, i) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            sections.forEach((section, i) => {
+                // Alternate left and right
+                section.classList.add(i % 2 === 0 ? "slide-in-left" : "slide-in-right");
+                observer.observe(section);
+            });
+        });
+    </script>
+
 
 </body>
 

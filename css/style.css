@@ -25,7 +25,7 @@ section {
 
 
 p {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.6;
 }
 
@@ -77,20 +77,13 @@ header img {
 .intro-image,
 .revenue-image,
 .ownership-image {
-    max-width: 75%;
+    max-width: 50%;
     height: auto;
     border-radius: 12px;
     object-fit: contain;
     border: 1px solid #ddd;
     background-color: #f9f9f9;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.intro-image:hover,
-.revenue-image:hover,
-.ownership-image:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .revenue-guess-section {
@@ -261,4 +254,121 @@ img {
     max-width: 100%;
     height: auto;
     object-fit: contain;
+}
+
+section,
+.container {
+    opacity: 0;
+    transform: translateX(0);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: transform, opacity;
+}
+
+.slide-in-left {
+    transform: translateX(-80px);
+}
+
+.slide-in-right {
+    transform: translateX(80px);
+}
+
+.show {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+.final-thoughts {
+    background: #ffffff;
+    border: 1px solid #e0e0ff;
+    border-radius: 14px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    line-height: 1.7;
+    max-width: 65vw;
+    margin: 4rem auto;
+}
+
+.final-thoughts p {
+    font-size: 18px;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.final-thoughts h4 {
+    color: #5c5ccc;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 1rem;
+}
+.site-footer {
+    text-align: center;
+    background-color: #f6f7fb;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 2rem 1rem;
+    margin-top: 4rem;
+    border-top: 1px solid #ddd;
+}
+
+.site-footer strong {
+    color: #5c5ccc;
+    font-weight: 700;
+}
+
+.site-footer .student-names {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+.hero-banner {
+    height: 80vh;
+    width: 100%;
+    background: url("../images/life-of-pets.png") center center / cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.hero-overlay h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-overlay h3 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.hero-overlay p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .hero-overlay {
+        padding: 1.5rem;
+    }
+    .hero-overlay h1 {
+        font-size: 2rem;
+    }
+    .hero-overlay h3 {
+        font-size: 1rem;
+    }
+    .hero-overlay p {
+        font-size: 0.9rem;
+    }
 }
