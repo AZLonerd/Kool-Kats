@@ -2,13 +2,11 @@
 
 **Team:** Daniel Ayoung-Chee, Ziwei “May” Tang, Joshua Lee, Yuang Zhang  
 
----
 
 ## Overview
 Kool Kats compares cats and dogs across media, research, ownership, and consumer markets.  
 The project uses data analysis and visual storytelling to show how dogs dominate in research, content, and product variety, while cats face fewer options and higher costs despite comparable adoption and affection levels.
 
----
 
 ## Research Focus
 We explored the following questions:
@@ -17,7 +15,6 @@ We explored the following questions:
 - Are pet products for cats or dogs more expensive or more varied?  
 - Is there more academic research about dogs than cats?  
 
----
 
 ## Data Sources
 | Category | Source |
@@ -28,7 +25,6 @@ We explored the following questions:
 | **Products & Costs** | [E-commerce Pet Supplies Dataset (Kaggle)](https://www.kaggle.com/datasets/kanchana1990/e-commerce-pet-supplies-dataset), [Pet Store Records 2020 (Kaggle)](https://www.kaggle.com/datasets/ippudkiippude/pet-store-records-2020) |
 | **Research** | JSTOR and Google Scholar keyword analysis |
 
----
 
 ## Key Insights
 1. Dog movies outnumber cat movies (370 vs 265) and earn roughly 2.5 times more revenue.  
@@ -38,7 +34,6 @@ We explored the following questions:
 5. Dog products are more varied; cat products are more expensive.  
 6. There is significantly more research about dogs than cats.  
 
----
 
 ## Data Storyline
 **Hook:** Movie revenue comparison showing that dog films consistently earn more.  
@@ -46,7 +41,6 @@ We explored the following questions:
 **Main Message:** Ownership, adoption, and social media popularity visualized through maps and dashboards.  
 **Call to Action:** Product and cost inequality visualized through an interactive shopping basket comparison.  
 
----
 
 ## Implementation Summary
 **Tools Used:** D3.js, Tableau, Python (Pandas), GitHub  
@@ -57,7 +51,6 @@ We explored the following questions:
 - **Joshua Lee:** Product variety and pricing comparison  
 - **Yuang Zhang:** Social media and online popularity visualizations  
 
----
 
 ## Findings and Takeaways
 - Dogs lead in visibility, research, and product availability.  
