@@ -52,7 +52,7 @@
         setTimeout(() => resultBox.classList.add("visible"), 10);
 
         diffEl.innerHTML = `
-            Looks like you were off by about <b>$${error} billion</b>.<br><br>
+            Looks like you were off by about <b>$${error} billion</b>!<br><br>
             <b>What this means:</b> among the <b>top 15 highest-grossing films</b> featuring either a cat or a dog,<br>
             <b style="color:#5457ff;">dog-centered movies</b> collectively earned about 
             <b style="color:#5457ff;">$2.43 billion</b> more than 
