@@ -146,28 +146,30 @@ export function renderAnimalPairViz(containerId = "#animal-pairs-viz") {
         .text("$0")
 
     function updateVisuals() {
-        const diff = catSum - dogSum, sign = diff > 0 ? "+" : diff < 0 ? "-" : ""
+        const diff = catSum - dogSum;
+        const diffColor = diff > 0 ? "#d67227" : diff < 0 ? "#457b9d" : "#555";
+
         caption.html(
             `<div style='color:#d67227'>Cats: $${fmt(catSum)}</div>` +
             `<div style='color:#457b9d'>Dogs: $${fmt(dogSum)}</div>` +
-            `<div style='color:#555'>Diff: ${sign}$${fmt(Math.abs(diff))}</div>`
-        )
+            `<div style='color:${diffColor}'>Diff: $${fmt(Math.abs(diff))}</div>`
+        );
 
         catBar.transition().duration(600)
             .attr("y", h / 2 - yScale(catSum) + 250)
-            .attr("height", yScale(catSum))
+            .attr("height", yScale(catSum));
 
         dogBar.transition().duration(600)
             .attr("y", h / 2 - yScale(dogSum) + 250)
-            .attr("height", yScale(dogSum))
+            .attr("height", yScale(dogSum));
 
         catLabel.transition().duration(600)
             .attr("y", h / 2 - yScale(catSum) - 10 + 250)
-            .on("end", () => catLabel.text(`$${fmt(catSum)}`))
+            .on("end", () => catLabel.text(`$${fmt(catSum)}`));
 
         dogLabel.transition().duration(600)
             .attr("y", h / 2 - yScale(dogSum) - 10 + 250)
-            .on("end", () => dogLabel.text(`$${fmt(dogSum)}`))
+            .on("end", () => dogLabel.text(`$${fmt(dogSum)}`));
     }
 
     const circles = g.selectAll("circle")
@@ -182,7 +184,7 @@ export function renderAnimalPairViz(containerId = "#animal-pairs-viz") {
             d3.select(this)
                 .transition()
                 .duration(150)
-                .attr("r", R * 1.15); // slightly larger
+                .attr("r", R * 1.15);
 
             const box = c.node().getBoundingClientRect();
             tooltip.style("left", e.clientX - box.left + 10 + "px")
@@ -199,7 +201,7 @@ export function renderAnimalPairViz(containerId = "#animal-pairs-viz") {
             d3.select(this)
                 .transition()
                 .duration(150)
-                .attr("r", R); // shrink back
+                .attr("r", R);
             tooltip.style("opacity", 0);
         })
 
