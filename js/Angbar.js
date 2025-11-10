@@ -222,7 +222,7 @@ function updateVisualization() {
         }
         svg.selectAll(".bar")
             .attr("y", height)
-            .attr("height", 0)       // initial height 0
+            .attr("height", 0)
             .transition()
             .duration(1000)
             .attr("y", d => y(d.stores))

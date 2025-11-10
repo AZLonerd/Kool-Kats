@@ -1,0 +1,294 @@
+body {
+    background-color: #f4f7ff;
+
+}
+
+section {
+    margin: 4rem auto;
+    max-width: 60vw;
+    display: flex;
+    flex-direction: column;
+}
+
+p {
+    font-size: 20px;
+}
+
+h4 {
+    font-size: 32px;
+    color: #000395;
+    font-weight: bold;
+}
+
+header {
+    background-color: #afb1ff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 50;
+    padding: 20px;
+}
+
+header,
+h2 {
+
+    font-size: 28px;
+    color: white;
+    font-weight: bold;
+
+}
+
+.revenue-intro {
+    text-align: center;
+    line-height: 1.6;
+}
+
+.intro-image-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.intro-image {
+    width: auto;
+    height: 500px;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: #666;
+    border: 1px solid #ccc;
+}
+
+.revenue-image-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin: 30px;
+}
+
+.revenue-image {
+    width: auto;
+    height: 200px;
+    background-color: #eee;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: #666;
+    border: 1px solid #ccc;
+}
+
+.revenue-guess-section {
+    background-color: #fff6f3;
+    border-radius: 12px;
+    border: black 1px solid;
+    padding: 2rem;
+    transition: background 0.4s ease;
+}
+
+.revenue-guess-slider {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    -webkit-appearance: none;
+    background: linear-gradient(90deg,
+            orange 50%,
+            #5457ff 50%);
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+
+.revenue-guess-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 10px solid #9c00cb;
+    cursor: pointer;
+}
+
+.revenue-guess-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #333;
+    cursor: pointer;
+}
+
+
+/* added */
+.container {
+    max-width: 800px;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    margin-top: 3rem;
+}
+
+.descriptions h5 {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+}
+
+.descriptions p {
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.descriptions h2 {
+    margin-top: 2rem;
+    font-weight: 600;
+    color: #222;
+}
+
+.answer-choices {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.ans-btn {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 30px;
+    background-color: #e6e6ff;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ans-btn:hover {
+    background-color: #cfcfff;
+    transform: translateY(-2px);
+}
+
+.ans-btn.selected {
+    background-color: blue;
+    color: white;
+
+}
+
+.reveal-btn {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.9rem 2.5rem;
+    border: none;
+    border-radius: 30px;
+    background-color: #8B8000;
+    color: #fff;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.reveal-btn:hover {
+    background-color: #8B8000;
+}
+
+#change-sorting {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    background-color: blue;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+#change-sorting:hover {
+    background-color: blue;
+}
+
+footer {
+    text-align: center;
+    margin-top: 3rem;
+    color: #888;
+}
+
+.shelter-controls {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.shelter-controls input[type="radio"] {
+    display: none;
+}
+
+.shelter-controls label {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+
+    /* default boring */
+    background-color: #e0e0e0;
+    border: 1px solid #999;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+
+.shelter-controls input[type="radio"]:checked+label {
+    background-color: #5457ff;
+    border-color: #000395;
+    color: white;
+}
+
+
+
+/* Ang's css animation */
+
+
+
+@keyframes emoji-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}
+
+.cat-emoji-anim {
+    animation: emoji-bounce 0.6s infinite ease-in-out;
+}
+
+.dog-emoji-anim {
+    animation: emoji-bounce 0.6s infinite ease-in-out;
+}
+
+.tree-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 6px;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.tree-btn:hover {
+    background-color: #5CA0D3;
+    transform: scale(1.05);
+}

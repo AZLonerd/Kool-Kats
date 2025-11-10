@@ -152,7 +152,7 @@ class ShelterStatsViz {
             .attr('stroke', 'black') // FIX: not the biggest fan of this...
             .attr('stroke-width', 1)
             .style('cursor', 'pointer')
-            .on('mouseover', function(event, d) {
+            .on('mouseover', function (event, d) {
                 const stateName = d.properties.name;
                 const stateData = vis.shelterDataMap[stateName];
 
@@ -183,12 +183,12 @@ class ShelterStatsViz {
                         `);
                 }
             })
-            .on('mousemove', function(event) {
+            .on('mousemove', function (event) {
                 vis.tooltip
                     .style("left", (event.pageX + 15) + "px")
                     .style("top", (event.pageY - 28) + "px");
             })
-            .on('mouseout', function() {
+            .on('mouseout', function () {
                 d3.select(this)
                     .attr('stroke', 'black')
                     .attr('stroke-width', 1);
@@ -282,7 +282,7 @@ Promise.all([
     shelterViz = new ShelterStatsViz('shelter-viz', geoData, shelterData, barChart);
 
     //make sure we listen to the buttons
-    d3.selectAll('input[name="shelter-metric"]').on('change', function() {
+    d3.selectAll('input[name="shelter-metric"]').on('change', function () {
         const selectedValue = d3.select(this).property('value');
         let viewType;
 

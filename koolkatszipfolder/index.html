@@ -1,0 +1,347 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kool-Kats</title>
+
+    <!-- Load Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,300,400italic,700" rel="stylesheet"
+        type="text/css">
+
+    <!-- CSS libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <!-- Custom CSS code -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/MovieRevenueStyles.css" />
+</head>
+
+<body>
+    <header>
+        <h2>
+            <img src="images/paw.png" style="width:25px"> Kool Kats <img src="images/paw.png" style="width:25px">
+        </h2>
+    </header>
+    <div style="height: 40px;"></div>
+    <section>
+
+        <div class="intro-image-row">
+            <img src="images/life-of-pets.png" alt="Cat movie still" class="intro-image">
+        </div>
+    </section>
+    <!--DANIELS SECTION-->
+
+
+
+
+    <!--Movie yapping + images-->
+    <section class="revenue-intro">
+        <h4> Movie Statistics </h4>
+        <p>
+            Whether they star as a furriendly fuzzball or crrrageous companion, cats and dogs have been featured in
+            movies
+            as early as the 19th century! Through their close relationship with humans, cats and dogs have made an
+            appearance
+            in thousands of movies and TV shows, acting in roles as funny, intelligent, and cute creatures!
+        </p>
+
+        <div class="revenue-image-row">
+            <img src="images/cat-movie.png" alt="Cat movie still" class="revenue-image">
+            <img src="images/dog-movie.png" alt="Dog movie still" class="revenue-image">
+        </div>
+
+        <p>
+            But their
+            influence doesn’t stop there. From viral internet memes and brand mascots to pet adoption campaigns and
+            booming pet product industries, cats and dogs continue to shape the way we express affection, humor, and
+            companionship in modern life. Our data visualizations explore how these beloved animals compare across
+            different realms — from media popularity and adoption rates to the growing market that revolves around them.
+        </p>
+
+
+
+    </section>
+
+    <h4> American Cinema: Guess the Split in Revenue! </h4>
+    <!--GUESS REVENUE-->
+    <section class="revenue-guess-section container my-4">
+        <p class="revenue-guess-subtitle">
+            Out of the <strong>$5.43&nbsp;billion total </strong> earned by the top 15 grossing <strong>pet
+                films</strong>, how much revenue do you think is made by movies featuring <strong>cats</strong> versus
+            movies featuring
+            <strong>dogs</strong>?
+        </p>
+
+        <div class="revenue-guess-widget">
+            <div class="revenue-guess-slider-wrap">
+                <input id="revenue-guess-slider" class="revenue-guess-slider" type="range" min="0" max="100" value="50"
+                    step="1" />
+            </div>
+
+            <div class="revenue-guess-readout">
+                <div>Cats: <strong id="revenue-guess-cats">$1.90B</strong></div>
+                <div>Dogs: <strong id="revenue-guess-dogs">$3.53B</strong></div>
+            </div>
+
+            <button id="revenue-guess-submit" class="revenue-guess-submit">Submit guess</button>
+
+            <div id="revenue-guess-result" class="revenue-guess-result" hidden>
+                <p><strong>Answer:</strong></p>
+                <p>Cat Movies = $1.50B</p>
+                <p>Dog Movies = $3.93B</p>
+                <p id="revenue-guess-diff"></p>
+            </div>
+        </div>
+    </section>
+
+    <!--Movie Revenue Data Vi-->
+    <section>
+        <p>
+            Let's explore how cats and dogs have performed at the box office. In the past 50 years, here are the top 15
+            highest
+            grossing films either showing a cat or a dog as a predominant figure:
+        </p>
+        <h4>Top 15 Grossing Films with a Predominant Cat or Dog</h4>
+        <div id="movie-ratings-viz"></div>
+
+    </section>
+
+    <!--ANGS SECTION-->
+
+    <h4>Cats and dogs are very popular in movies</h4>
+    <div class="container">
+
+        <div class="descriptions">
+            <p>
+                From movies like Mr.peabody and Sherman and shows like Family Guy, dogs have been
+                entertaining audiences for decades! Cats are similar, there are also many movies and shows
+                relate to cats like Puss in Boots and Garfields. So here is the real question for you: which
+                animal has higher average movie ratings?
+            </p>
+            <h2>Do you think dogs or cats have higher ratings?</h2>
+            <div class="answer-choices">
+                <button class="ans-btn">Cats</button>
+                <button class="ans-btn">Dogs</button>
+            </div>
+            <button class="reveal-btn">Reveal Answer</button>
+        </div>
+
+        <div class="movie-ratings" style="display: none;">
+            <p id="feedback" style="font-weight: bold; margin-top: 10px;"></p>
+            <h1>Average movie ratings for cats and dogs</h1>
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="ranking-type2" style="display: none;">Group by</label>
+                    <select style="display:none" id="ranking-type2" onchange="updateVisualization()">
+                        <option value="stores">Rating</option>
+
+                    </select>
+
+                </div>
+            </form>
+
+            <div id="chart-area"></div>
+
+        </div>
+    </div>
+
+
+
+    <!-- <div>
+        <h4>Presense of Dogs and cats in social media</h4>
+        <div style="width:70%; background-color: white; margin:auto">
+            <p>Cats and dogs are both popular social media animals because they are
+                adorable! many people own cats or dogs in the United States
+                so it is common for them to post their favorite pet on social media!
+                from longer video platforms like youtube to short video social media like instagram
+                and tiktok, cats and dogs are everywhere!
+                so the real question is, how popular are cats and dogs in social media?
+            </p>
+            <button>Click to explore</button>
+            <p style="margin-top: 50px;">Dogs dominate on youtube in terms of number of youtube video entity</p>
+            <p>25972(dogs) vs 9457(cats)</p>
+            <p>in terms of tiktok, cats beat dogs in terms of videos tagged with cats and dogs</p>
+            <p>572 million(cats) vs 502.1 million(dogs)</p>
+            <p>this is interesting right? what do you think the reason is</p>
+            <p>we will add winner 3 sketch here</p>
+            <p>I will use a pie chart for the amount of cats/dogs entity in youtube videos
+                and tiktok videos tagged with cats vs dogs
+            </p>
+            <div style="width: 200px; height:200px; background-color: red; border-radius: 50%;margin: auto;">pie chart
+                placeholder</div>
+
+        </div>
+    </div> -->
+
+
+    <div>
+        <h4 style="margin-top: 80px; margin-bottom: 80px;">Presence of Dogs and Cats in Social Media</h4>
+        <div id="dashboard" style="width: 70%; background-color: white; margin: auto; padding: 20px;">
+            <p>
+                Cats and dogs are both popular social media animals because they are
+                adorable! many people own cats or dogs in the United States
+                so it is common for them to post their favorite pet on social media!
+                from longer video platforms like youtube to short video social media like instagram
+                and tiktok, cats and dogs are everywhere!
+                so the real question is, how popular are cats and dogs in social media?
+            </p>
+
+
+            <h4 style="margin-top: 20px;">TikTok and Instagram videos tagged with Cats vs Dogs</h4>
+            <div id="tree-chart" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+
+
+            <div id="donut-charts"
+                style="display: flex; flex-wrap: wrap; justify-content: space-around; margin-top: 20px;">
+            </div>
+            <div id="donut-description" style="text-align: center; margin-top: 15px; font-size: 20px; color: #333;">
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!--MAYS SECTION-->
+    <section class="ownership-intro">
+        <h4> Ownership and Shelter Statistics </h4>
+        <p>
+            Does media play a role in how Americans choose which pet to own? Let's take a look!
+        </p>
+
+        <div class="ownernship-image-row">
+            <img src="images/catdoghuggies.jpg" alt="Cat dog hugs" class="ownership-image">
+        </div>
+    </section>
+
+    <h4> 2024 AVMA Pet Ownership Statistics </h4>
+    <!--AVMA stats bar graph-->
+    <section class="AVMA-stats-house">
+        <p>
+            It is undeniable that dogs are the more popular pet in the United States according to 2024 statistics from
+            the American Veterinary Medical Association (AVMA). While this is likely not a casual relationship with
+            media representation,
+            there does seem to be some correlation.
+        </p>
+        <!--selection-->
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="ranking-type">Group by</label>
+                <select class="form-control" id="ranking-type">
+                    <option value="households">Number of US Households Owning Cats vs Dogs (in millions)</option>
+                    <option value="total">Total Number of Cats vs Dogs in the US (in millions)</option>
+                </select>
+            </div>
+        </form>
+
+        <div id="ownership-viz"></div>
+    </section>
+
+    <!--map viz that's hard :(-->
+    <section class="map-house">
+        <p>
+            That being said, United States shelter adoption statistics might surprise you! Below, you can explore
+            data from <a
+                href="https://www.shelteranimalscount.org/state-level-data/">Shelter Animal Count's 2024 report</a>.
+            Click the buttons below to
+            switch between different views.
+            <br>
+            (Note that Average Adoptions = Total adoptions in the state / Total # of shelter organizations in the state.)
+        </p>
+
+        <!--        radio buttons for single selection !-->
+        <div class="shelter-controls">
+            <input type="radio" id="avg-cat" name="shelter-metric" value="avgCat" checked>
+            <label for="avg-cat">Average Cat Adoptions</label>
+
+            <input type="radio" id="avg-dog" name="shelter-metric" value="avgDog">
+            <label for="avg-dog">Average Dog Adoptions</label>
+
+            <input type="radio" id="ratio" name="shelter-metric" value="ratio">
+            <label for="ratio">Ratio (Cat:Dog)</label>
+        </div>
+
+
+        <!-- Map visualization -->
+        <div id="shelter-viz"></div>
+
+        <!-- Bar chart visualization below the map -->
+        <div id="bar-chart-viz" style="margin-top: 10px;"></div>
+
+        <p>
+            Even though dogs are the more popular pet, cats are more likely to be adopted from a shelter. We think the
+            reason behind this is because <a
+                href="https://cordis.europa.eu/article/id/442154-why-are-there-so-many-dog-breeds-but-only-a-few-cat-breeds">there
+                are much more dog breeds than cat breeds</a>.
+            Dogs are breeded for specific purposes (that's why there's so many more breeds of dogs!),
+            so it's not unreasonable to think that when someone wants to adopt a dog,
+            they'd rather get a specific breed from a breeder than go to a shelter. (Extra credit: Go ask a cat owner
+            what breed their cat is.
+            They'll likely say something like, "I don't know. Orange." Then ask a dog owner what breed their dog is. We
+            bet that the dog owner will
+            probably know what breed their dog is!)
+        </p>
+    </section>
+
+
+
+    <!--JOSHS SECTION-->
+    <section class="shopping-cart-intro">
+        <h4> Pet Products Overview </h4>
+        <p>
+            Data shows that almost twice the number of Dog toys were offered on the Market compared to Cat toys.
+        </p>
+        <div id="shopping-cart-viz"></div>
+
+        <p>
+            <br>
+            Additionally, Cat products as a whole tend to be more expensive than Dog products!
+        </p>
+        <div id="animal-pairs-viz" style="height:700px; width: full"></div>
+
+
+        <p>
+            <br>
+            Evidently, Cat owners are way disadvantaged compared to Dog owners. But that does not have to be true.
+        </p>
+        <div id="trade-bars-viz"></div>
+        <p>
+            When the Average Trade Amounts are compared, Cat owners actually beat the Dog owners by almost 1.5 times!
+            Although, Cat owners are provided a smaller number of options, they prove to be more dedicated and
+            passionate,
+            buying the same products in higher quantities. Cat owners don't lack love nor care, just the lack of
+            options!
+            With a bit more media attention, and more marketing focus on cats, we can welcome a catty tomorrow, a feline
+            future for all!
+        </p>
+
+    </section>
+
+
+
+    <!-- Load JS libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+        crossorigin="anonymous"></script>
+    <!-- d3 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!--topojson-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+
+    <!-- Load data, create visualizations -->
+    <script src="js/revenueGuess.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/Angbar.js"></script>
+    <script src="js/PetOwnershipViz.js" type="module"></script>
+    <script src="js/TopStatesBarChart.js"></script>
+    <script src="js/ShelterStatsViz.js"></script>
+    <script src="js/AngSocialMedia.js"></script>
+
+</body>
+
+</html>
