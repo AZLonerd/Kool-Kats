@@ -54,7 +54,7 @@ export function renderAnimalPairViz(containerId = "#animal-pairs-viz") {
         .style("font-size", "12px")
         .style("border", "1px solid #ccc")
         .style("border-radius", "4px")
-        .style("background", "#fff")
+        .style("background", "#ffcece")
         .style("cursor", "pointer")
         .on("mouseover", function () { d3.select(this).style("background", "#eee") })
         .on("mouseout", function () { d3.select(this).style("background", "#fff") })
@@ -178,14 +178,31 @@ export function renderAnimalPairViz(containerId = "#animal-pairs-viz") {
         .attr("fill", d => d.base)
         .attr("opacity", .96)
         .style("cursor", "pointer")
-        .on("mousemove", (e, d) => {
-            const box = c.node().getBoundingClientRect()
+        .on("mouseover", function (e, d) {
+            d3.select(this)
+                .transition()
+                .duration(150)
+                .attr("r", R * 1.15); // slightly larger
+
+            const box = c.node().getBoundingClientRect();
             tooltip.style("left", e.clientX - box.left + 10 + "px")
                 .style("top", e.clientY - box.top + 10 + "px")
                 .style("opacity", 1)
-                .html(`<b>${d.label}</b><div>Cat: ${fmt(cats[d.id].cat)}</div><div>Dog: ${fmt(cats[d.id].dog)}</div>`)
+                .html(`<b>${d.label}</b><div>Cat: ${fmt(cats[d.id].cat)}</div><div>Dog: ${fmt(cats[d.id].dog)}</div>`);
         })
-        .on("mouseleave", () => tooltip.style("opacity", 0))
+        .on("mousemove", (e, d) => {
+            const box = c.node().getBoundingClientRect();
+            tooltip.style("left", e.clientX - box.left + 10 + "px")
+                .style("top", e.clientY - box.top + 10 + "px");
+        })
+        .on("mouseout", function () {
+            d3.select(this)
+                .transition()
+                .duration(150)
+                .attr("r", R); // shrink back
+            tooltip.style("opacity", 0);
+        })
+
         .on("click", (_, d) => {
             const i = d.id, pair = g.selectAll("circle").filter(p => p.id === i)
             if (picked.has(i)) {
@@ -221,4 +238,33 @@ export function renderAnimalPairViz(containerId = "#animal-pairs-viz") {
         circles.attr("filter", null).attr("fill", d => d.base)
         updateVisuals()
     })
+    c.append("button")
+        .text("Select All")
+        .style("position", "absolute")
+        .style("bottom", "10px")
+        .style("left", "15px")
+        .style("padding", "5px 10px")
+        .style("font-size", "12px")
+        .style("border", "1px solid #ccc")
+        .style("border-radius", "4px")
+        .style("background", "#ddffdf")
+        .style("cursor", "pointer")
+        .on("mouseover", function () { d3.select(this).style("background", "#eee") })
+        .on("mouseout", function () { d3.select(this).style("background", "#fff") })
+        .on("click", () => {
+            picked.clear();
+            catSum = 0;
+            dogSum = 0;
+            pts.forEach(d => {
+                picked.add(d.id);
+                if (d.side === "cat") catSum += d.val;
+                else dogSum += d.val;
+            });
+            g.selectAll("circle")
+                .attr("filter", "url(#gold-glow)")
+                .attr("fill", d => d3.color(d.sel).darker(0.5));
+            updateVisuals();
+        });
+
+
 }

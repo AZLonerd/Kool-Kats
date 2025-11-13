@@ -3,7 +3,7 @@ let data = [];
 
 let margin = { top: 40, right: 10, bottom: 60, left: 60 };
 let width = 600 - margin.left - margin.right;
-let height = 250 - margin.top - margin.bottom;
+let height = 450 - margin.top - margin.bottom;
 
 
 let svg = d3.select("#chart-area")

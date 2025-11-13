@@ -21,7 +21,7 @@ export function renderMovieRevenueViz(containerId = "#movie-ratings-viz") {
     const svg = container.append("svg")
         .attr("width", "100%")
         .attr("height", "100%")
-        .style("background-color", "#f5f5f5");
+        .style("background-color", "#ffffff");
     const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
     const caption = container.append("div")
         .attr("class", "caption")
