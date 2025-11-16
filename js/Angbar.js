@@ -141,7 +141,7 @@ function updateVisualization() {
     yAxisGroup.transition().duration(1000).call(d3.axisLeft(y));
 
     function handleMouseOver(event, d) {
-        if (d.company === "Movies without promient animals") {
+        if (d.company === "Movies without prominent animals") {
             d3.select(this).transition().duration(200).style("fill", null);
             const otherEmojis = ["🎬", "🍿", "🎥", "⭐", "🌟"];
             const repeatCount = 10;
