@@ -2,7 +2,8 @@ class TopStatesBarChart {
     constructor(parentElement, shelterData) {
         this.parentElement = parentElement;
         this.shelterData = shelterData;
-        this.currentView = 'cats'; // default view
+        this.currentView = 'cats'; //default view
+        this.selectedStates = []; //track selected states
 
         this.initVis();
     }
@@ -86,16 +87,43 @@ class TopStatesBarChart {
     wrangleData() {
         let vis = this;
 
-        vis.displayData = vis.shelterData
-            .map(d => ({
-                state: d.State,
-                value: vis.currentView === 'cats' ? +d['Average Cat Adoptions'] :
-                    vis.currentView === 'dogs' ? +d['Average Dog Adoptions'] :
-                        +d['ratio (Cat:Dog)']
-            }))
-            .filter(d => !isNaN(d.value))
-            .sort((a, b) => b.value - a.value)
-            .slice(0, 10);
+        //avg calculation for total
+        let allValues = vis.shelterData
+            .map(d => {
+                if (vis.currentView === 'cats') return +d['Average Cat Adoptions'];
+                if (vis.currentView === 'dogs') return +d['Average Dog Adoptions'];
+                return +d['ratio (Cat:Dog)'];
+            })
+            .filter(v => !isNaN(v));
+
+        vis.averageValue = d3.mean(allValues);
+
+        //prepare  display data (selection + avg)
+        vis.displayData = [];
+
+        //adding selection
+        vis.selectedStates.forEach(stateName => {
+            const stateData = vis.shelterData.find(d => d.State === stateName);
+            if (stateData) {
+                vis.displayData.push({
+                    state: stateName,
+                    value: vis.currentView === 'cats' ? +stateData['Average Cat Adoptions'] :
+                        vis.currentView === 'dogs' ? +stateData['Average Dog Adoptions'] :
+                            +stateData['ratio (Cat:Dog)'],
+                    isAverage: false
+                });
+            }
+        });
+
+        //avg
+        vis.displayData.push({
+            state: 'US Average',
+            value: vis.averageValue,
+            isAverage: true
+        });
+
+        //desc sort
+        vis.displayData.sort((a, b) => b.value - a.value);
 
         vis.updateVis();
     }
@@ -104,9 +132,9 @@ class TopStatesBarChart {
         let vis = this;
 
         const titles = {
-            cats: 'Top 10 States - Cat Adoptions',
-            dogs: 'Top 10 States - Dog Adoptions',
-            ratio: 'Top 10 States - Cat:Dog Ratio'
+            cats: 'Selected States - Cat Adoptions',
+            dogs: 'Selected States - Dog Adoptions',
+            ratio: 'Selected States - Cat:Dog Ratio'
         };
         vis.title.text(titles[vis.currentView]);
 
@@ -117,7 +145,6 @@ class TopStatesBarChart {
         };
         vis.xAxisLabel.text(labels[vis.currentView]);
 
-        // FIXED: match colors of others
         const colors = {
             cats: '#f4a261',
             dogs: '#457b9d',
@@ -150,18 +177,57 @@ class TopStatesBarChart {
         bars.enter()
             .append('rect')
             .attr('class', 'bar')
-            .attr('fill', barColor)
+            .attr('fill', d => d.isAverage ? 'rgba(200,198,198,0.89)' : barColor) //idk if i like this color..
             .attr('y', d => vis.yScale(d.state))
             .attr('height', vis.yScale.bandwidth())
             .attr('x', 0)
             .attr('width', 0)
+            .on('mouseover', function(event, d) {
+                vis.barTooltip
+                    .style("opacity", 1)
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 28) + "px")
+                    .html(`
+                        <strong>${d.state}</strong><br/>
+                        ${labels[vis.currentView]} - <strong>${d.value.toFixed(vis.currentView === 'ratio' ? 2 : 0)}</strong>
+                    `);
+            })
+            .on('mousemove', function(event) {
+                vis.barTooltip
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on('mouseout', function() {
+                vis.barTooltip.style("opacity", 0);
+            })
             .merge(bars)
             .transition()
             .duration(800)
-            .attr('fill', barColor)
+            .attr('fill', d => d.isAverage ? '#c6c2c2' : barColor)
             .attr('y', d => vis.yScale(d.state))
             .attr('height', vis.yScale.bandwidth())
             .attr('width', d => vis.xScale(d.value));
+
+        //re-attach event handlers for updated bars
+        vis.svg.selectAll('.bar')
+            .on('mouseover', function(event, d) {
+                vis.barTooltip
+                    .style("opacity", 1)
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 28) + "px")
+                    .html(`
+                        <strong>${d.state}</strong><br/>
+                        ${labels[vis.currentView]} - <strong>${d.value.toFixed(vis.currentView === 'ratio' ? 2 : 0)}</strong>
+                    `);
+            })
+            .on('mousemove', function(event) {
+                vis.barTooltip
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on('mouseout', function() {
+                vis.barTooltip.style("opacity", 0);
+            });
 
         const valueLabels = vis.svg.selectAll('.value-label')
             .data(vis.displayData, d => d.state);
@@ -193,6 +259,11 @@ class TopStatesBarChart {
 
     changeView(view) {
         this.currentView = view;
+        this.wrangleData();
+    }
+
+    updateSelectedStates(states) {
+        this.selectedStates = states;
         this.wrangleData();
     }
 }

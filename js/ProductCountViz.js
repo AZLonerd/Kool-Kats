@@ -65,7 +65,7 @@ function buildViz(catValue, dogValue) {
         .attr("text-anchor", "middle")
         .style("font-size", "30px")
         .style("font-weight", "bold")
-        .text("Pet Product Trade Amount - drop and play!");
+        .text("Pet Products: Number of Options");
 
     const buttonG = svg.append("g")
         .attr("transform", `translate(${outerW / 2}, ${margin.top})`)
@@ -121,7 +121,7 @@ function buildViz(catValue, dogValue) {
         .domain([0, maxValue])
         .range([gridH, 0]);
     const axisY = d3.axisLeft(scaleY)
-        .tickValues([0, 333, 667, 1000]);
+        .tickValues([0, 200, 400, 600, 800, 1000]);
 
     svg.append("g")
         .attr("transform", `translate(${gridsOffsetX - 40}, ${gridsOffsetY})`)
@@ -338,9 +338,9 @@ function buildViz(catValue, dogValue) {
 
     function buildCircles(value, basketX, basketY, basketW, basketH, color) {
         const p = Math.max(0, Math.min(1, value / maxValue));
-        const maxBalls = 75;
-        const count = Math.max(15, Math.round(p * maxBalls));
-        const r = Math.min(cellW, cellH) / 2 - 5;
+        const maxBalls = 150;
+        const count = Math.max(20, Math.round(p * maxBalls));
+        const r = Math.min(cellW, cellH) / 2 - 11;
 
         return d3.range(count).map(i => ({
             x: basketX + Math.random() * basketW,
@@ -402,6 +402,21 @@ function buildViz(catValue, dogValue) {
         catSim.stop();
         dogSim.stop();
         tooltip.style("opacity", 0);
+    }
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    dropIntoGrid("cat")
+                    dropIntoGrid("dog");
+                    observer.unobserve(containerNode);
+                }
+            });
+        }, {
+            threshold: 1
+        });
+        observer.observe(containerNode);
     }
 }
 

@@ -5,6 +5,7 @@ class ShelterStatsViz {
         this.shelterData = shelterData;
         this.barChart = barChart;
         this.currentView = 'cats'; // default will be cats
+        this.selectedStates = new Set(); // track selected states
 
         // continous color scales. not sure if i *love* the colors
         this.colorSchemes = {
@@ -34,6 +35,20 @@ class ShelterStatsViz {
         vis.wrangleData();
         if (vis.barChart) {
             vis.barChart.changeView(view);
+        }
+    }
+
+    clearAllSelections() {
+        let vis = this;
+        vis.selectedStates.clear();
+
+        // update all state stroke widths back to normal
+        vis.mapGroup.selectAll('.state')
+            .attr('stroke-width', 1);
+
+        // update bar chart
+        if (vis.barChart) {
+            vis.barChart.updateSelectedStates([]);
         }
     }
 
@@ -133,7 +148,6 @@ class ShelterStatsViz {
             .attr('class', 'state')
             .merge(states)
             .transition()
-            .duration(500)
             .attr('d', vis.path)
             .attr('fill', d => {
                 const stateName = d.properties.name;
@@ -149,9 +163,32 @@ class ShelterStatsViz {
             });
 
         vis.mapGroup.selectAll('.state')
-            .attr('stroke', 'black') // FIX: not the biggest fan of this...
-            .attr('stroke-width', 1)
+            .attr('stroke', function(d) {
+                return vis.selectedStates.has(d.properties.name) ? 'black' : 'black'; // FIX: not the biggest fan of this...
+            })
+            .attr('stroke-width', function(d) {
+                return vis.selectedStates.has(d.properties.name) ? 2 : 1;
+            })
             .style('cursor', 'pointer')
+            .on('click', function(event, d) {
+                const stateName = d.properties.name;
+
+                // toggle selection
+                if (vis.selectedStates.has(stateName)) {
+                    vis.selectedStates.delete(stateName);
+                } else {
+                    vis.selectedStates.add(stateName);
+                }
+
+                // update stroke width for selected state
+                d3.select(this)
+                    .attr('stroke-width', vis.selectedStates.has(stateName) ? 2 : 1);
+
+                // update bar chart with selected states
+                if (vis.barChart) {
+                    vis.barChart.updateSelectedStates(Array.from(vis.selectedStates));
+                }
+            })
             .on('mouseover', function (event, d) {
                 const stateName = d.properties.name;
                 const stateData = vis.shelterDataMap[stateName];
@@ -179,7 +216,7 @@ class ShelterStatsViz {
                         .style("top", (event.pageY - 28) + "px")
                         .html(`
                             <strong>${stateName}</strong><br/>
-                            ${label}: <strong>${displayValue}</strong>
+                            ${label} - <strong>${displayValue}</strong>
                         `);
                 }
             })
@@ -188,10 +225,11 @@ class ShelterStatsViz {
                     .style("left", (event.pageX + 15) + "px")
                     .style("top", (event.pageY - 28) + "px");
             })
-            .on('mouseout', function () {
+            .on('mouseout', function (d) {
+                const stateName = d3.select(this).datum().properties.name;
                 d3.select(this)
                     .attr('stroke', 'black')
-                    .attr('stroke-width', 1);
+                    .attr('stroke-width', vis.selectedStates.has(stateName) ? 2 : 1);
 
                 vis.tooltip.style("opacity", 0);
             });
@@ -297,6 +335,13 @@ Promise.all([
         console.log('View changed to:', viewType); // FIX: debuging bc this isn't working asklfha
         if (shelterViz && viewType) {
             shelterViz.changeView(viewType);
+        }
+    });
+
+    // listen for clear all button
+    d3.select('#clear-selections-btn').on('click', function() {
+        if (shelterViz) {
+            shelterViz.clearAllSelections();
         }
     });
 });
