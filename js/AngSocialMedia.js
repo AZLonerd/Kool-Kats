@@ -107,7 +107,7 @@ class SocialMediaCharts {
         function showtt(event, d) {
             self.tooltip
                 .style("opacity", 1)
-                .html(`${emoji} ${type}: ${(value * 100).toFixed(1)}%<br>(${Math.round(actualCount).toLocaleString()} videos)`)
+                .html(`${emoji} ${type}: ${(value * 100).toFixed(1)}%<br>(${Math.round(actualCount).toLocaleString()} views)`)
                 .style("left", event.pageX + "px")
                 .style("top", event.pageY - 28 + "px");
         }
@@ -160,7 +160,6 @@ class SocialMediaCharts {
             ]
         };
 
-
         const treeWidth = svgWidth - margin.left - margin.right;
         const treeHeight = svgHeight - margin.top - margin.bottom;
 
@@ -175,15 +174,22 @@ class SocialMediaCharts {
         const root = d3.hierarchy(treeData).sum(d => d.value);
         treeLayout(root);
 
-        const leafValues = [...this.tiktokData.map(d => d.count), ...this.instagramData.map(d => d.count)];
+        const leafValues = [
+            ...this.tiktokData.map(d => d.count),
+            ...this.instagramData.map(d => d.count)
+        ];
+
         const sizeScale = d3.scaleSqrt()
             .domain([d3.min(leafValues), d3.max(leafValues)])
             .range([8, 25]);
 
+        const totals = {
+            TikTok: this.tiktokData[0].count + this.tiktokData[1].count,
+            Instagram: this.instagramData[0].count + this.instagramData[1].count
+        };
 
-        let link1 = root.links()
         svgTree.selectAll(".link")
-            .data(link1)
+            .data(root.links())
             .enter()
             .append("line")
             .attr("x1", d => d.source.y)
@@ -193,57 +199,96 @@ class SocialMediaCharts {
             .attr("stroke", "gray")
             .attr("stroke-width", 2);
 
-
-        let descendants1 = root.descendants()
-
         const nodes = svgTree.selectAll(".node")
-            .data(descendants1)
+            .data(root.descendants())
             .enter()
             .append("g")
             .attr("transform", d => `translate(${d.y},${d.x})`);
 
-
         nodes.append("circle")
-            .attr("r", d => d.children ? 12 : sizeScale(d.data.value))
-            .attr("fill", d => d.children ? "#fff" : this.colorScale(d.data.name))
-            .attr("stroke", d => d.children ? "#000" : "#333")
-            .attr("stroke-width", 1.5)
+            .attr("r", d => {
+                if (d === root) return 4; // 👈 very small root node
+                if (d.data.name === "TikTok" || d.data.name === "Instagram") {
+                    return sizeScale(totals[d.data.name]);
+                } else {
+                    return sizeScale(d.data.value);
+                }
+            })
+            .attr("fill", d => {
+                if (d === root) return "#ddd"; // light gray root circle
+                return d.children ? "#fff" : this.colorScale(d.data.name);
+            })
+            .attr("stroke", d => d === root ? "#999" : d.children ? "#000" : "#333")
+            .attr("stroke-width", d => (d === root ? 1 : 1.5))
+            .style("cursor", d => (!d.children && d.parent) ? "pointer" : "default")
             .on("mouseover", (event, d) => {
-                if (!d.children) {
+                if (d === root) return;
+
+                if (!d.children && d.parent) {
+                    d3.select(event.currentTarget)
+                        .transition()
+                        .duration(200)
+                        .attr("fill", d3.color(this.colorScale(d.data.name)).darker(0.8));
+
                     this.tooltip
                         .style("opacity", 1)
-                        .html(`${d.data.name}: ${d.data.value.toLocaleString()}`)
+                        .html(`${d.data.name}: ${d.data.value.toString()} views`)
+                        .style("left", event.pageX + "px")
+                        .style("top", event.pageY - 28 + "px");
+                }
+
+                else if (d.data.name === "TikTok" || d.data.name === "Instagram") {
+                    const platform = d.data.name;
+                    const total = totals[platform];
+                    this.tooltip
+                        .style("opacity", 1)
+                        .html(`<strong>${platform}</strong><br>Total: ${total.toLocaleString()} views`)
                         .style("left", event.pageX + "px")
                         .style("top", event.pageY - 28 + "px");
                 }
             })
-            .on("mouseout", () => this.tooltip.style("opacity", 0));
+            .on("mouseout", (event, d) => {
+                this.tooltip.style("opacity", 0);
+
+
+                if (!d.children && d.parent) {
+                    d3.select(event.currentTarget)
+                        .transition()
+                        .duration(200)
+                        .attr("fill", this.colorScale(d.data.name));
+                }
+            })
+
+            .on("click", (event, d) => {
+                if (!d.children && d.parent) {
+                    const key = `${d.data.name} (${d.parent.data.name})`;
+                    d3.select("#donut-charts").style("display", "flex");
+                    d3.select("#charts").style("display", "none");
+
+                    const container = d3.select("#donut-charts").html("");
+                    this.initChart(key, this.donutData[key], container.node());
+                }
+            });
 
         nodes.append("text")
-            .attr("dy", 3)
-            .attr("x", d => d.children ? -20 : sizeScale(d.data.value) + 15)
-            .attr("text-anchor", d => d.children ? "end" : "start")
+            .attr("dy", d => (d === root ? -7 : 5))
+            .attr("x", d => {
+                if (d === root) return 0;
+                return d.children ? -20 : sizeScale(d.data.value) + 10;
+            })
+            .attr("dx", d => {
+                if (d === root) return 0;
+                return d.children ? -35 : sizeScale(d.data.value) + 10
+            })
+            .attr("text-anchor", d => {
+                if (d === root) return "end";
+                return d.children ? "end" : "start";
+            })
             .text(d => d.data.name)
-            .attr("font-size", d => d.children ? "16px" : "14px");
-
-        nodes.filter(d => !d.children)
-            .append("foreignObject")
-            .attr("x", d => sizeScale(d.data.value) + 40)
-            .attr("y", -10)
-            .attr("width", 120)
-            .attr("height", 30)
-            .append("xhtml:button")
-            .attr("class", "tree-btn")
-            .text("Show details")
-            .on("click", (event, d) => {
-                const key = `${d.data.name} (${d.parent.data.name})`;
-                d3.select("#donut-charts").style("display", "flex");
-                d3.select("#charts").style("display", "none");
-
-                const container = d3.select("#donut-charts").html("");
-                this.initChart(key, this.donutData[key], container.node());
-            });
+            .attr("font-size", d => (d === root ? "18px" : d.children ? "16px" : "14px"))
+            .attr("font-weight", d => (d === root ? "bold" : "normal"));
     }
+
 }
 
 

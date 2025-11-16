@@ -141,15 +141,41 @@ function updateVisualization() {
     yAxisGroup.transition().duration(1000).call(d3.axisLeft(y));
 
     function handleMouseOver(event, d) {
-        // Don't show emojis for "Movies without promient animals"
         if (d.company === "Movies without promient animals") {
+            d3.select(this).transition().duration(200).style("fill", null);
+            const otherEmojis = ["🎬", "🍿", "🎥", "⭐", "🌟"];
+            const repeatCount = 10;
+
+            const patternId = "randomPattern";
+            let pattern = defs.select(`#${patternId}`);
+            if (!pattern.empty()) { pattern.remove() };
+
+            pattern = defs.append("pattern")
+                .attr("id", patternId)
+                .attr("width", 35 * repeatCount)
+                .attr("height", 20)
+                .attr("patternUnits", "userSpaceOnUse");
+
+            for (let i = 0; i < repeatCount; i++) {
+                pattern.append("text")
+                    .attr("x", 5 + i * 35)
+                    .attr("y", 15)
+                    .style("font-size", "18px")
+                    .text(otherEmojis[Math.floor(Math.random() * otherEmojis.length)]);
+            }
+
+            d3.select(this).transition().duration(200).style("fill", `url(#${patternId})`);
+
+            // Show the value label
             svg.selectAll(".bar-label")
                 .filter(lbl => lbl.company === d.company)
                 .transition().duration(200)
                 .style("opacity", 1);
-            return; // Exit early
+
+            return; // exit early
         }
 
+        // For cats and dogs
         const isCat = d.company.toLowerCase().includes("cat");
         const pattern = isCat ? "url(#catPattern)" : "url(#dogPattern)";
         const animClass = isCat ? "cat-emoji-anim" : "dog-emoji-anim";
@@ -166,17 +192,21 @@ function updateVisualization() {
     function handleMouseOut(event, d) {
         d3.select(this).transition().duration(200).style("fill", "steelblue");
 
-        if (d.company === "Movies without promient animals") return;
-
         const isCat = d.company.toLowerCase().includes("cat");
-        d3.selectAll(isCat ? ".cat-emoji" : ".dog-emoji")
-            .classed(isCat ? "cat-emoji-anim" : "dog-emoji-anim", false);
+        const isDog = d.company.toLowerCase().includes("dog");
+
+        if (isCat) {
+            d3.selectAll(".cat-emoji").classed("cat-emoji-anim", false);
+        } else if (isDog) {
+            d3.selectAll(".dog-emoji").classed("dog-emoji-anim", false);
+        }
 
         svg.selectAll(".bar-label")
             .filter(lbl => lbl.company === d.company)
             .transition().duration(200)
             .style("opacity", 0);
     }
+
 
 
     d3.select("#ranking-type2").on("change", updateVisualization);
