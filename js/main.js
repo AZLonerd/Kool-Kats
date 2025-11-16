@@ -10,6 +10,7 @@ ProductCountViz2();
 
 window.addEventListener("scroll", function () {
     const header = document.querySelector("header");
+    if (!header) return;
     const fadeStart = 0;
     const fadeEnd = 200;
     const scrollTop = window.scrollY;
