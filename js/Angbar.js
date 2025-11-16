@@ -166,16 +166,16 @@ function updateVisualization() {
 
             d3.select(this).transition().duration(200).style("fill", `url(#${patternId})`);
 
-            // Show the value label
+
             svg.selectAll(".bar-label")
                 .filter(lbl => lbl.company === d.company)
                 .transition().duration(200)
                 .style("opacity", 1);
 
-            return; // exit early
+            return;
         }
 
-        // For cats and dogs
+
         const isCat = d.company.toLowerCase().includes("cat");
         const pattern = isCat ? "url(#catPattern)" : "url(#dogPattern)";
         const animClass = isCat ? "cat-emoji-anim" : "dog-emoji-anim";

@@ -29,7 +29,7 @@ class SocialMediaCharts {
 
         this.colorScale = d3.scaleOrdinal()
             .domain(["Cats", "Dogs"])
-            .range(["#FFB6C1", "#87CEFA"]);
+            .range(["rgb(244, 162, 97)", "rgb(69, 123, 157)"]);
 
         this.tooltip = d3.select("body")
             .append("div")
@@ -94,10 +94,10 @@ class SocialMediaCharts {
         svg.append("text")
             .attr("text-anchor", "middle")
             .attr("y", -this.radius - 15)
-            .attr("font-size", "14px")
+            .attr("font-size", "13px")
             .attr("font-weight", "bold")
             .style("fill", "#333")
-            .text(`${(value * 100).toFixed(1)}% ${emoji} are ${type.toLowerCase()} videos out of total cats + dogs on ${platform}`);
+            .text(`${(value * 100).toFixed(1)}% ${emoji} are ${type.toLowerCase()} videos views out of total cats + dogs views on ${platform}`);
 
         const arcs = svg.selectAll("arc")
             .data(pie(data))
@@ -118,7 +118,7 @@ class SocialMediaCharts {
         }
 
         arcs.append("path")
-            .attr("fill", (d, i) => i === 0 ? (type === "Cats" ? "#FFB6C1" : "#87CEFA") : "#eee")
+            .attr("fill", (d, i) => i === 0 ? (type === "Cats" ? "rgb(244, 162, 97)" : "rgb(69, 123, 157)") : "#eee")
             .each(function (d) {
                 this._current = { startAngle: 0, endAngle: 0 };
             })
@@ -207,7 +207,7 @@ class SocialMediaCharts {
 
         nodes.append("circle")
             .attr("r", d => {
-                if (d === root) return 4; // 👈 very small root node
+                if (d === root) return 4;
                 if (d.data.name === "TikTok" || d.data.name === "Instagram") {
                     return sizeScale(totals[d.data.name]);
                 } else {
@@ -215,7 +215,7 @@ class SocialMediaCharts {
                 }
             })
             .attr("fill", d => {
-                if (d === root) return "#ddd"; // light gray root circle
+                if (d === root) return "#ddd";
                 return d.children ? "#fff" : this.colorScale(d.data.name);
             })
             .attr("stroke", d => d === root ? "#999" : d.children ? "#000" : "#333")
