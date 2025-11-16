@@ -40,7 +40,7 @@ export function renderMovieRevenueViz(containerId = "#movie-ratings-viz") {
         { label: "Movies Featuring Dogs", x: width / 2 + GAP, color: "#457b9d", selected: "#2f5c7b", bigR: DOG_BIG_R },
     ];
 
-    d3.csv("../data/MovieRevenue.csv", d => ({
+    d3.csv("data/MovieRevenue.csv", d => ({
         category: d.Category,
         title: d.Title,
         revenue: +d.Revenue,
