@@ -77,13 +77,13 @@ export function renderAnimalPairViz(containerId = "#animal-pairs-viz") {
     const cy = h / 2, cxCat = w / 2 - gap / 2, cxDog = w / 2 + gap / 2
 
     const img = 120
-    g.append("image").attr("href", "../images/catprod.png")
+    g.append("image").attr("href", "images/catprod.png")
         .attr("x", cxCat - img / 2)
         .attr("y", cy - img / 2)
         .attr("width", img).attr("height", img)
         .style("pointer-events", "none")
 
-    g.append("image").attr("href", "../images/dogprod.png")
+    g.append("image").attr("href", "images/dogprod.png")
         .attr("x", cxDog - img / 2)
         .attr("y", cy - img / 2)
         .attr("width", img).attr("height", img)
